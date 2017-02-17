@@ -34,7 +34,7 @@ if(!is_null($events['events'])){
     $headers = ['Content-Type: application/json','Authorization: Bearer ' . $access_token];
 
     $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST")
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFILEDS, $post);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
