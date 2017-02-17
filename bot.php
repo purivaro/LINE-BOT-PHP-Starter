@@ -27,6 +27,10 @@ if(!is_null($events['events'])){
                     'type' => 'text',
                     'text' => "เมื่อกี้คุณพูดว่า..".$text
                 ],
+                [
+                    'type' => 'text',
+                    'text' => "มีอะไรเหรอครับ?"
+                ],
             ];
 
 
