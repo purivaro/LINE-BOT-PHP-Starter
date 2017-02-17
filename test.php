@@ -1,41 +1,25 @@
 <?php
+$url_ibs = "http://www.ibsone.com/project/linebot/puribot/api/translate.php";
+$text = 'ลิง';
+$lang = 'สเปน';
 
-$url = "http://www.ibsone.com/project/linebot/puribot/api/translate.php";
-
-// Build message to reply back
-$messages = [
-    [
-        'type' => 'text',
-        'text' => "ดีคับ"
-    ],
-    [
-        'type' => 'text',
-        'text' => "เมื่อกี้คุณพูดว่า..".$text
-    ],
-    [
-        'type' => 'text',
-        'text' => "มีอะไรเหรอครับ?"
-    ],
+$data_ibs = [
+'text'=> $text,
+'lang'=>$lang
 ];
 
+$post_ibs = json_encode($data_ibs);
+$headers_ibs = ['Content-Type: application/json'];
+$ch_ibs = curl_init($url_ibs);
+curl_setopt($ch_ibs, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($ch_ibs, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch_ibs, CURLOPT_POSTFIELDS, $post_ibs);
+curl_setopt($ch_ibs, CURLOPT_HTTPHEADER, $headers_ibs);
+curl_setopt($ch_ibs, CURLOPT_FOLLOWLOCATION, 1);
+$result_ibs = curl_exec($ch_ibs);
+curl_close($ch_ibs);
 
-$url = 'https://api.line.me/v2/bot/message/reply';
-$data = [
-'replyToken'=> $replyToken,
-'messages'=>$messages
-];
-$post = json_encode($data);
-$headers = ['Content-Type: application/json','Authorization: Bearer ' . $access_token];
-
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-$result = curl_exec($ch);
-curl_close($ch);
-
-echo $result."\r\n";
-
+$res = json_decode($result_ibs,true);
+$result = $res['result'];
+echo $result;
 ?>
