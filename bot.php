@@ -15,7 +15,6 @@ if(!is_null($events['events'])){
             $text = $event['message']['text'];
 
             $url_ibs = "http://www.ibsone.com/project/linebot/puribot/api/translate.php";
-            $text = 'ลิง';
             $lang = 'สเปน';
 
             $data_ibs = [
