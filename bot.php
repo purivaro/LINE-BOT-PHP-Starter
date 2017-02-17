@@ -33,7 +33,7 @@ if(!is_null($events['events'])){
 
             $res = json_decode($result_ibs,true);
 
-            $feedback_txt = $res['result'];
+            $messages = $res['messages'];
 
 
 
@@ -41,6 +41,7 @@ if(!is_null($events['events'])){
             $replyToken = $event['replyToken'];
 
             // Build message to reply back
+            /*
             $messages = [
                 [
                     'type' => 'text',
@@ -55,7 +56,7 @@ if(!is_null($events['events'])){
                     'text' => "มีอะไรเหรอครับ?"
                 ],
             ];
-
+*/
 
             $url = 'https://api.line.me/v2/bot/message/reply';
             $data = [
