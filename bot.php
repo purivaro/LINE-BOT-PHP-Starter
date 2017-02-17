@@ -35,28 +35,8 @@ if(!is_null($events['events'])){
 
             $messages = $res['messages'];
 
-
-
             // Get reply token
             $replyToken = $event['replyToken'];
-
-            // Build message to reply back
-            /*
-            $messages = [
-                [
-                    'type' => 'text',
-                    'text' => "ดีคับ"
-                ],
-                [
-                    'type' => 'text',
-                    'text' => "เมื่อกี้คุณพูดว่า..".$feedback_txt
-                ],
-                [
-                    'type' => 'text',
-                    'text' => "มีอะไรเหรอครับ?"
-                ],
-            ];
-*/
 
             $url = 'https://api.line.me/v2/bot/message/reply';
             $data = [
