@@ -25,7 +25,7 @@ if(!is_null($events['events'])){
         }
     }
 
-    $url = 'https://api.line.me/v1/oauth/verify';
+    $url = 'https://api.line.me/v2/bot/message/reply';
     $data = [
         'replyToken'=> $replyToken,
         'messages'=>[$messages]
