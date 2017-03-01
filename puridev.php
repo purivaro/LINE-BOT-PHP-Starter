@@ -49,15 +49,12 @@ foreach ($events as $event) {
         $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขอบคุณที่ลงทะเบียน คุณ".$displayName);
         $messages->add($_msg);     
 
-
         $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$statusMessage");
         $messages->add($_msg);      
 
-
+/* 
         $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$pictureUrl");
         $messages->add($_msg);      
-
-/* 
 
         $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ID : $userId");
         $messages->add($_msg);
