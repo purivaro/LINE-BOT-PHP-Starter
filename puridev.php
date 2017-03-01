@@ -20,7 +20,21 @@ foreach ($events as $event) {
         $reply_token = $event->getReplyToken();
         $text = $event->getText();
         $userId = $event->getUserId();
-        $bot->replyText($reply_token, $userId);
+
+
+        $messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
+        for($i=0;$i<2;$i++)
+        {
+            $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$userId".$i);
+            $messages->add($_msg);
+        }
+        $imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder("https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg","https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg");            
+        $messages->add($imageMessageBuilder);
+
+
+        $response = $bot->replyMessage($reply_token, $messages);
+
+        echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
 }
 echo "OK";
