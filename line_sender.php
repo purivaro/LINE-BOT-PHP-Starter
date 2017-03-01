@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-raised btn-primary">ส่ง</button>
+                                <button type="submit" class="btn btn-raised btn-success">ส่ง</button>
                                 <button type="clear" class="btn btn-raised btn-default">clear</button>
                             </div>           
                         </form> 
