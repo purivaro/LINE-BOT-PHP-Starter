@@ -14,65 +14,15 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="header">Checkbox</h1>
-
-                <h2>Default <small>inside a <code>.form-group</code></small></h2>
-                <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                    <input type="checkbox"> Notifications
-                    </label>
-                </div>
-                <p class="help-block">Notify me about updates to apps or games that I've downloaded</p>
-                </div>
-                <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                    <input type="checkbox" checked=""> Auto-updates
-                    </label>
-                </div>
-                <p class="help-block">Auto-update apps over wifi only</p>
-                </div>
-
-                <h2>Horizontal form with column label variations</h2>
-                <form class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-sm-2" for="ch1">Touch sounds</label>
-                    <div class="col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                        <input id="ch1" type="checkbox" checked="">
-                        </label>
-                    </div>
-                    <p class="help-block">This shows the generic label variant.</p>
+                <h1 class="header">ระบบส่งข้อความ
+                    <small>Puri line bot</small>
+                </h1>
+                <div class="inputs">
+                    <div class="form-group label-floating">
+                        <label for="text_send" class="control-label">ข้อความที่ต้องการส่ง</label>
+                        <input type="text" class="form-control" id="text_send" name="text_send">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="ch3">Vibrate on touch</label>
-                    <div class="col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                        <input id="ch3" type="checkbox">
-                        </label>
-                    </div>
-                    <p class="help-block">This shows the <code>control-label</code> variant.</p>
-                    </div>
-                </div>
-                </form>
-
-                <h2>Default <small>outside a <code>.form-group</code></small></h2>
-                <div class="checkbox">
-                <label>
-                    <input type="checkbox"> Notifications
-                </label>
-                </div>
-                <p class="help-block">Without a <code>.form-group</code>, <code>.help-block</code> always shows</p>
-                <div class="checkbox">
-                <label>
-                    <input type="checkbox" checked=""> Auto-updates
-                </label>
-                </div>
-                <p class="help-block">Without a <code>.form-group</code>, <code>.help-block</code> sizing is the same as the <code>label</code></p>            
             </div>
         </div>
     </div>
