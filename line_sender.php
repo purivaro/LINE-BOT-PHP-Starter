@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel='stylesheet'>
     <link href="bower_components/bootstrap-material-design/dist/bootstrap-material-design.min.css" rel='stylesheet'>
+    <link href="bower_components/bootstrap-material-design/dist/ripples.min.css" rel='stylesheet'>
 </head>
 <body>
     <div class="container">
