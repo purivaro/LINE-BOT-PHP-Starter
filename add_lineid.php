@@ -61,8 +61,10 @@
         $("body").on("submit","#form_sender",function(e){
             e.preventDefault();
             var this_ = $(this);
-            var url = this_.attr('action');         
-            var data = JSON.stringify(this_.serializeArray());
+            var url = this_.attr('action');
+            var line_id = this_.find("#line_id").val();         
+            var nickname = this_.find("#nickname").val();         
+            var data = JSON.stringify({line_id:line_id,nickname:nickname}});
             $.ajax({
                 type: 'POST',
                 url: url,
