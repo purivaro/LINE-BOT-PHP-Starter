@@ -4,12 +4,11 @@ define("LINE_MESSAGING_API_CHANNEL_TOKEN", '6tS7pO00ncfJFML6WrMEMXhtYru4rMFRapvH
 
 require __DIR__."/vendor/autoload.php";
 $user_id = $_REQUEST['user_id'];
+$text_send = $_REQUEST['text_send'];
 // user id ของ puri = 'U02a2cb394330d90571a21b09f2c230ea'
 
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]);
-
-$text_send = "สวัสดี Puri";
 
 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_send);
 $response = $bot->pushMessage($user_id, $textMessageBuilder);
