@@ -1,9 +1,7 @@
 <?php
-<<<<<<< HEAD
-$access_token = 'tjNYZtCkJ031iEjB3YJJOcRLjN8si60Z3jc2b3aR36tX95Qi4bwaruSdYxP34x0coZlGJ0YXDVVGk/fxxRerx9AXW5s4bFungF6OXvoa39YMCR12oGXDrH8JgGUDFGa1eKTP7Mrdihz9AniPim0RlgdB04t89/1O/w1cDnyilFU=';
-=======
-$access_token = '+3Rtmn3cUM2ToF17ubFQKVfZ5M6z+jKV6dJet2nhoKx3N+6wt1P31KDcyZz1ENnT51zGDZ23dznOogrpAhxNh3z881mOnyZ5M5mZVZPsyDjmf0BtSEFt7z7dA6Kmm0jGrhHLnLylyjyy7yCs38mUBQdB04t89/1O/w1cDnyilFU=';
->>>>>>> 26d416314555ea2f1329f3c7549d8c97498f265b
+
+$access_token = '6tS7pO00ncfJFML6WrMEMXhtYru4rMFRapvH4qzPbxFp/2cf9dK6uxzzotYxyNMV51zGDZ23dznOogrpAhxNh3z881mOnyZ5M5mZVZPsyDj52DEvuJQZCf1u67UBBgkj+zrgPiD6n8Pd+lByPRTN0wdB04t89/1O/w1cDnyilFU=';
+
 
 // Get POST body content
 $content = file_get_contents('php://input');
@@ -18,10 +16,9 @@ if(!is_null($events['events'])){
             // Get text sent
             $text = $event['message']['text'];
 
-<<<<<<< HEAD
+
             /*
-=======
->>>>>>> 26d416314555ea2f1329f3c7549d8c97498f265b
+
             $url_ibs = "http://www.ibsone.com/project/linebot/vstarapp/api/reply.php";
 
             $data_ibs = [
@@ -42,7 +39,7 @@ if(!is_null($events['events'])){
             $res = json_decode($result_ibs,true);
 
             $messages = $res['messages'];
-<<<<<<< HEAD
+
             */
             $text = "hello";
             $messages = [
@@ -51,9 +48,8 @@ if(!is_null($events['events'])){
 				'text' => $text
 			    ]
             ];
-=======
 
->>>>>>> 26d416314555ea2f1329f3c7549d8c97498f265b
+
             // Get reply token
             $replyToken = $event['replyToken'];
 
