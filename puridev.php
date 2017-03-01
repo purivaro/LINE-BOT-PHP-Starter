@@ -46,9 +46,9 @@ foreach ($events as $event) {
         $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขอบคุณที่ลงทะเบียน คุณ".$profile['displayName']);
         $messages->add($_msg);     
 
-        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($profile['statusMessage']);
+/*        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($profile['statusMessage']);
         $messages->add($_msg);        
- /*     $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ID : $userId");
+        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ID : $userId");
         $messages->add($_msg);
         $txt = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$text");
         $messages->add($txt);    
