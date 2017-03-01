@@ -32,6 +32,8 @@
                                     <option value='U02a2cb394330d90571a21b09f2c230ea'>ลพ.ภูริ iPhone</option>
                                     <option value='Ua2bdf85b0466beeb8c8af8fbccfba5df'>ลพ.ภูริ Android</option>
                                     <option value='Ub1c272947e6de86751d7142334b88ca1'>เอ็กซ์</option>
+                                    <option value='Uf13b465993502a1956fd25a3c65aa801'>ยุ้ย</option>
+                                    <option value='U27067457ab265d39046bd089d4711d8e'>จี๊ด</option>
                                 </select>
                             </div>
                             <div class="inputs">
