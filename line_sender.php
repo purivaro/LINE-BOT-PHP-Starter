@@ -9,7 +9,7 @@
     <link href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css" rel='stylesheet'>
     <link href="node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" rel='stylesheet'>
     <link href="node_modules/bootstrap-material-design/dist/css/ripples.min.css" rel='stylesheet'>
-    <link href="node_modules/toastr/build/css/toastr.min.css" rel='stylesheet'>
+    <link href="node_modules/toastr/build/toastr.min.css" rel='stylesheet'>
 </head>
 <body>
     <div class="container">
@@ -42,10 +42,10 @@
         </div>
     </div>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/boostrap.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/bootstrap-material-design/dist/js/material.min.js"></script>
     <script src="node_modules/bootstrap-material-design/dist/js/ripples.min.js"></script>
-    <script src="node_modules/toastr/build/css/toastr.min.js"></script>
+    <script src="node_modules/toastr/build/toastr.min.js"></script>
     <script>
     $(document).ready(function(){
         $.material.init();
