@@ -6,7 +6,6 @@
     <meta http-equiv="Content-Type">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel='stylesheet'>
-    <link href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css" rel='stylesheet'>
     <link href="node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" rel='stylesheet'>
     <link href="node_modules/bootstrap-material-design/dist/css/ripples.min.css" rel='stylesheet'>
     <link href="node_modules/toastr/build/toastr.min.css" rel='stylesheet'>
@@ -19,7 +18,7 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">
                        <h3 class="panel-title">Puri Line SMS
-                        <small>ระบบส่งข้อความผ่าน Line</small></h3>
+                        <small>ระบบส่งข้อความ Line</small></h3>
                     </div>
                     <div class="panel-body">
                         <form action="json_puri_push_msg.php" method="post" id="form_sender">
