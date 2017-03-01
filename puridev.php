@@ -48,7 +48,7 @@ foreach ($events as $event) {
         $response = $bot->replyMessage($reply_token, $messages);
 
 
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userId);
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} {$text}");
         $response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
 
         echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
