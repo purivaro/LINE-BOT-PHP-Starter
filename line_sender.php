@@ -13,9 +13,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
-            </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <h1 class="header">Checkbox</h1>
 
                 <h2>Default <small>inside a <code>.form-group</code></small></h2>
