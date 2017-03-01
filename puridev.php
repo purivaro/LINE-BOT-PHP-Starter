@@ -33,6 +33,7 @@ foreach ($events as $event) {
             //echo $profile['displayName'];
             //echo $profile['pictureUrl'];
             //echo $profile['statusMessage'];
+            $statusMessage =  $profile['statusMessage'];
         }
 
 
@@ -49,7 +50,7 @@ foreach ($events as $event) {
         $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ID : $userId");
         $messages->add($_msg);
 
-        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($profile['statusMessage']);
+        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$statusMessage");
         $messages->add($_msg);      
 
 /* 
