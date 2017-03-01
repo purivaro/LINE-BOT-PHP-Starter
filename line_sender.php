@@ -38,7 +38,7 @@
                             </div>
                             <div class="inputs">
                                 <div class="form-group label-floating">
-                                    <label for="text_send" class="control-label">ข้อความที่ต้องการส่ง</label>
+                                    <label for="text_send" class="control-label">พิมพ์ข้อความที่ต้องการส่ง</label>
                                     <input type="text" class="form-control" id="text_send" name="text_send">
                                 </div>
                             </div>
