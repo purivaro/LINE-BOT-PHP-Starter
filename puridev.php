@@ -28,15 +28,16 @@ if(!is_null($events['events'])){
             // Get reply token
             $replyToken = $event['replyToken'];
 
-            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$userId");
-
             $messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
             for($i=0;$i<2;$i++)
             {
                 $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$userId".$i);
                 $messages->add($_msg);
             }
-            
+            $imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder("https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg","https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg");            
+            $messages->add($imageMessageBuilder);
+
+
             $response = $bot->replyMessage($replyToken, $messages);
 
             echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
