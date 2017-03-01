@@ -61,6 +61,18 @@
     $(document).ready(function(){
         $.material.init();
 
+
+        var mongo_apikey = 'JrLs9PiSVp8OfgZn_jbSdKCvO01BIbxx';
+        var url = 'https://api.mlab.com/api/1/databases/puridb/collections/col_line_id?apiKey='+mongo_apikey;
+        $.get(url,function(response){
+            var res = $.parseJSON(response);
+            $.each(res,function(i,v){
+                console.log(v.line_id);
+                console.log(v.nickname);
+            });
+        });
+
+
         $("body").on("submit","#form_sender",function(e){
             e.preventDefault();
             var this_ = $(this);
