@@ -27,7 +27,7 @@ foreach ($events as $event) {
             $response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
         }
 
-        $getProfileResponse = $bot->getProfile('<userId>');
+        $getProfileResponse = $bot->getProfile($userId);
         if ($getProfileResponse->isSucceeded()) {
             $profile = $getProfileResponse->getJSONDecodedBody();
             //echo $profile['displayName'];
