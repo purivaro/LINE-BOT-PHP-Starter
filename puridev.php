@@ -6,14 +6,16 @@ define("LINE_MESSAGING_API_CHANNEL_SECRET", '59cc1269e2956fd52b9c0eaadc70225c');
 define("LINE_MESSAGING_API_CHANNEL_TOKEN", '6tS7pO00ncfJFML6WrMEMXhtYru4rMFRapvH4qzPbxFp/2cf9dK6uxzzotYxyNMV51zGDZ23dznOogrpAhxNh3z881mOnyZ5M5mZVZPsyDj52DEvuJQZCf1u67UBBgkj+zrgPiD6n8Pd+lByPRTN0wdB04t89/1O/w1cDnyilFU=');
 
 require __DIR__."/vendor/autoload.php";
-
+/*
 $bot = new \LINE\LINEBot(
     new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN),
     ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]
 );
+*/
 
-$signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-$body = file_get_contents("php://input");
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]);
+
 
 // Get POST body content
 $content = file_get_contents('php://input');
@@ -66,24 +68,15 @@ if(!is_null($events['events'])){
             // Get reply token
             $replyToken = $event['replyToken'];
 
-            $url = 'https://api.line.me/v2/bot/message/reply';
-            $data = [
-                'replyToken'=> $replyToken,
-                'messages'=>$messages
-            ];
-            $post = json_encode($data);
-            $headers = ['Content-Type: application/json','Authorization: Bearer ' . $access_token];
 
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-            $result = curl_exec($ch);
-            curl_close($ch);
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+            $response = $bot->replyMessage($replyToken, $textMessageBuilder);
 
-            echo $result."\r\n";
+
+            echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+
+
+
         }
     }
 }
