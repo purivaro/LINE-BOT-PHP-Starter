@@ -10,7 +10,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHA
 
 $body = file_get_contents("php://input");
 
-$events = $bot->parseEventRequest($body, $signature);
+$events = [];
 
 foreach ($events as $event) {
         $reply_token = $event->getReplyToken();
