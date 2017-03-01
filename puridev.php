@@ -38,7 +38,7 @@ if(!is_null($events['events'])){
             $messages->add($imageMessageBuilder);
 
 
-            $response = $bot->replyMessage($replyToken, $imageMessageBuilder);
+            $response = $bot->replyMessage($replyToken, $messages);
 
             echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
