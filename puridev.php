@@ -27,6 +27,14 @@ foreach ($events as $event) {
             $response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
         }
 
+        $getProfileResponse = $bot->getProfile('<userId>');
+        if ($getProfileResponse->isSucceeded()) {
+            $profile = $getProfileResponse->getJSONDecodedBody();
+            //echo $profile['displayName'];
+            //echo $profile['pictureUrl'];
+            //echo $profile['statusMessage'];
+        }
+
 
         $messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 /*        for($i=0;$i<2;$i++)
@@ -35,7 +43,7 @@ foreach ($events as $event) {
             $messages->add($_msg);
         }
  */
-        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขอบคุณที่ลงทะเบียน");
+        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขอบคุณที่ลงทะเบียน คุณ".$profile['displayName']);
         $messages->add($_msg);        
         $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ID : $userId");
         $messages->add($_msg);
