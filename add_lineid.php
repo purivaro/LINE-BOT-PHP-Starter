@@ -62,7 +62,7 @@
             e.preventDefault();
             var this_ = $(this);
             var url = this_.attr('action');         
-            var data = JSON.stringify({this_.serializeArray()});
+            var data = JSON.stringify(this_.serializeArray());
             $.ajax({
                 type: 'POST',
                 url: url,
