@@ -17,6 +17,14 @@
                 <h1 class="header">ระบบส่งข้อความ
                     <small>Puri line bot</small>
                 </h1>
+                <div class="form-group">
+                  <select id="sendto" name="sendto" multiple class="form-control">
+                    <option>ลพ.ภูริ iPhone</option>
+                    <option>ลพ.ภูริ Android</option>                  
+                    <option>ไก่</option>
+                    <option>เอ็กซ์</option>
+                  </select>
+                </div>
                 <div class="inputs">
                     <div class="form-group label-floating">
                         <label for="text_send" class="control-label">ข้อความที่ต้องการส่ง</label>
