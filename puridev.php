@@ -8,9 +8,13 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHA
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]);
 
 
+$signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $body = file_get_contents("php://input");
-
-$events = [];
+try {
+  $events = $bot->parseEventRequest($body, $signature);
+} catch (Exception $e) {
+  var_dump($e); //錯誤內容
+}
 
 foreach ($events as $event) {
         $reply_token = $event->getReplyToken();
