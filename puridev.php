@@ -22,6 +22,11 @@ foreach ($events as $event) {
         $userId = $event->getUserId();
         $type = $event->getType();
 
+        if($type=="follow"){
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} add you as friend");
+            $response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
+        }
+
 
         $messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 /*        for($i=0;$i<2;$i++)
