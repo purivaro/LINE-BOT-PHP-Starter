@@ -21,8 +21,8 @@
             <div class="col-sm-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                       <h3 class="panel-title">Puri Line SMS
-                        <small>ระบบส่งข้อความ Line</small></h3>
+                       <h3 class="panel-title">Puri Add Contact Line
+                        <small>โปรแกรมเพิ่ม Contact Line</small></h3>
                     </div>
                     <div class="panel-body">
                         <form action="https://api.mlab.com/api/1/databases/puridb/collections/col_line_id?apiKey=JrLs9PiSVp8OfgZn_jbSdKCvO01BIbxx" method="post" id="form_sender">
@@ -63,9 +63,17 @@
             var this_ = $(this);
             var url = this_.attr('action');         
             var data = JSON.stringify(this_.serialize());
-            $.post(url,data,function(response){
-                console.log(response);
-            })
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data, 
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(response) { 
+                    console.log(response); 
+                }
+            });
+
         });
     });
     </script>
