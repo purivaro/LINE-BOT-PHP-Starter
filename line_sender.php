@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <div class="row" style='margin-top:20px;'>
-            <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-2  col-md-offset-5 text-center">
+            <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-4 col-md-2  col-md-offset-5 text-center">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/1024px-LINE_logo.svg.png" class="img-responsive">
             </div>
         </div>
