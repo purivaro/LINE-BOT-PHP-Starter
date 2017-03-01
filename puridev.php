@@ -33,6 +33,7 @@ foreach ($events as $event) {
             //echo $profile['displayName'];
             //echo $profile['pictureUrl'];
             //echo $profile['statusMessage'];
+            $displayName =  $profile['displayName'];
             $statusMessage =  $profile['statusMessage'];
         }
 
@@ -44,7 +45,7 @@ foreach ($events as $event) {
             $messages->add($_msg);
         }
  */
-        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขอบคุณที่ลงทะเบียน คุณ".$profile['displayName']);
+        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขอบคุณที่ลงทะเบียน คุณ".$displayName);
         $messages->add($_msg);     
 
 
@@ -74,7 +75,7 @@ foreach ($events as $event) {
         $response = $bot->replyMessage($reply_token, $messages);
 
 
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} {$text}");
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} : {$displayName} : {$text}");
         $response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
 
         echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
