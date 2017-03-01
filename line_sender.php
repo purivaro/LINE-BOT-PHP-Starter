@@ -9,13 +9,14 @@
     <link href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css" rel='stylesheet'>
     <link href="node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" rel='stylesheet'>
     <link href="node_modules/bootstrap-material-design/dist/css/ripples.min.css" rel='stylesheet'>
+    <link href="node_modules/toastr/build/css/toastr.min.css" rel='stylesheet'>
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="header">ระบบส่งข้อความ
-                    <small>Puri Line SMS</small>
+                <h1 class="header">Puri Line SMS
+                    <small>ระบบส่งข้อความ Line</small>
                 </h1>
                 <form action="json_puri_push_msg.php" method="post" id="form_sender">
                     <div class="form-group">
@@ -44,6 +45,7 @@
     <script src="node_modules/bootstrap/dist/js/boostrap.min.js"></script>
     <script src="node_modules/bootstrap-material-design/dist/js/material.min.js"></script>
     <script src="node_modules/bootstrap-material-design/dist/js/ripples.min.js"></script>
+    <script src="node_modules/toastr/build/css/toastr.min.js"></script>
     <script>
     $(document).ready(function(){
         $.material.init();
@@ -55,8 +57,10 @@
             var data = this_.serialize();
             $.post(url,data,function(response){
                 var res = $.parseJson(response);
-                console.log(res.feedback);
-                console.log(res.bot_response);
+                if(res.success){
+                    toastr.seccess(res.feedback);
+                    this_.find('select,input').val('');
+                }
             })
         });
     });
