@@ -20,6 +20,7 @@ foreach ($events as $event) {
         $reply_token = $event->getReplyToken();
         $text = $event->getText();
         $userId = $event->getUserId();
+        $type = $event->getType();
 
 
         $messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
@@ -29,6 +30,8 @@ foreach ($events as $event) {
             $messages->add($_msg);
         }
         $txt = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$text");
+        $messages->add($txt);    
+        $txt = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$type");
         $messages->add($txt);    
 
         $imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder("https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg","https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg");            
