@@ -30,9 +30,9 @@ foreach ($events as $event) {
             $messages->add($_msg);
         }
  */
-        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("You id is");
+        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขอบคุณที่ลงทะเบียน");
         $messages->add($_msg);        
-        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($userId);
+        $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ID : $userId");
         $messages->add($_msg);
         /*
         $txt = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$text");
