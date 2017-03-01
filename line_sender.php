@@ -15,30 +15,34 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <div class="well bs-component">
-                    <h1 class="header">Puri Line SMS
-                        <small>ระบบส่งข้อความผ่าน Line</small>
-                    </h1>
-                    <form action="json_puri_push_msg.php" method="post" id="form_sender">
-                        <div class="form-group">
-                            <select id="sendto" name="sendto" class="form-control" required>
-                                <option value=''>กรุณาเลือกผู้รับ</option>
-                                <option value='U02a2cb394330d90571a21b09f2c230ea'>ลพ.ภูริ iPhone</option>
-                                <option value='Ua2bdf85b0466beeb8c8af8fbccfba5df'>ลพ.ภูริ Android</option>
-                                <option value='Ub1c272947e6de86751d7142334b88ca1'>เอ็กซ์</option>
-                            </select>
-                        </div>
-                        <div class="inputs">
-                            <div class="form-group label-floating">
-                                <label for="text_send" class="control-label">ข้อความที่ต้องการส่ง</label>
-                                <input type="text" class="form-control" id="text_send" name="text_send">
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                       <h3 class="panel-title">Puri Line SMS
+                        <small>ระบบส่งข้อความผ่าน Line</small></h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="json_puri_push_msg.php" method="post" id="form_sender">
+                            <div class="form-group">
+                                <select id="sendto" name="sendto" class="form-control" required>
+                                    <option value=''>กรุณาเลือกผู้รับ</option>
+                                    <option value='U02a2cb394330d90571a21b09f2c230ea'>ลพ.ภูริ iPhone</option>
+                                    <option value='Ua2bdf85b0466beeb8c8af8fbccfba5df'>ลพ.ภูริ Android</option>
+                                    <option value='Ub1c272947e6de86751d7142334b88ca1'>เอ็กซ์</option>
+                                </select>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-raised btn-primary">ส่ง</button>
-                            <button type="clear" class="btn btn-raised btn-default">clear</button>
-                        </div>           
-                    </form>                
+                            <div class="inputs">
+                                <div class="form-group label-floating">
+                                    <label for="text_send" class="control-label">ข้อความที่ต้องการส่ง</label>
+                                    <input type="text" class="form-control" id="text_send" name="text_send">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-raised btn-primary">ส่ง</button>
+                                <button type="clear" class="btn btn-raised btn-default">clear</button>
+                            </div>           
+                        </form> 
+                    </div>
                 </div>
             </div>
         </div>
