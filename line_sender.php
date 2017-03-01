@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link href="bower_components/bootstrap-material-design/dist/bootstrap-material-design.min.css">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel='stylesheet'>
+    <link href="bower_components/bootstrap-material-design/dist/bootstrap-material-design.min.css" rel='stylesheet'>
 </head>
 <body>
     <div class="container">
