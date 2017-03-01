@@ -68,6 +68,8 @@
             //var res = $.parseJSON(response);
             //console.log(response);
             $.each(response,function(i,v){
+                console.log(i);
+                console.log(v);
                 $("#sendto").append("<option value='"+v.line_id+"'>"+v.nickname+"</option");
             });
         });
