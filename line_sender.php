@@ -22,7 +22,7 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">
                        <h3 class="panel-title">Puri Line SMS
-                        <small>ระบบส่งข้อความLine</small></h3>
+                        <small>ระบบส่งข้อความ Line</small></h3>
                     </div>
                     <div class="panel-body">
                         <form action="json_puri_push_msg.php" method="post" id="form_sender">
