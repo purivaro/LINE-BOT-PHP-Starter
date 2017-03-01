@@ -7,9 +7,11 @@ require __DIR__."/vendor/autoload.php";
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]);
 
-$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('สวัสดี Puri');
+$text_send = "สวัสดี Puri";
+
+$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_send);
 $response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
 
 
-echo "OK";
+echo "$text_send OK";
 ?>
