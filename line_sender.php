@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1 class="header">Puri Line SMS
-                    <small>ระบบส่งข้อความ Line</small>
+                    <small>ระบบส่งข้อความผ่าน Line</small>
                 </h1>
                 <form action="json_puri_push_msg.php" method="post" id="form_sender">
                     <div class="form-group">
