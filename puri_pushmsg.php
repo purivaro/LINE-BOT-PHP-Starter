@@ -10,8 +10,14 @@ $text_send = $_REQUEST['text_send'];
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]);
 
+
+
 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_send);
 $response = $bot->pushMessage($user_id, $textMessageBuilder);
+
+$response = $bot->pushMessage('Ua2bdf85b0466beeb8c8af8fbccfba5df', $textMessageBuilder);
+
+
 
 
 echo "$text_send OK";
