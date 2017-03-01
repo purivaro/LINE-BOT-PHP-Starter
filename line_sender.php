@@ -56,10 +56,12 @@
             var url = this_.attr('action');
             var data = this_.serialize();
             $.post(url,data,function(response){
-                var res = $.parseJson(response);
+                var res = $.parseJSON(response);
                 if(res.success){
-                    toastr.seccess(res.feedback);
+                    toastr.success(res.feedback);
                     this_.find('select,input').val('');
+                }else{
+                    toastr.danger(res.feedback);
                 }
             })
         });
