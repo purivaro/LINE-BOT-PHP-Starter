@@ -10,4 +10,6 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHA
 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello puri');
 $response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
 
+
+echo "OK";
 ?>
