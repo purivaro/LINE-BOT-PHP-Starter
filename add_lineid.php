@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>โปรแกรมส่งข้อความ Line bot</title>
+    <title>โปรแกรมเพิ่ม Contact Line bot</title>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
