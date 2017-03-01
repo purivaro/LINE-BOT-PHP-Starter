@@ -70,7 +70,6 @@
             $.each(response,function(i,v){
                 $("#sendto").append("<option value='"+v.line_id+"'>"+v.nickname+"</option");
             });
-            */
         });
 
 
