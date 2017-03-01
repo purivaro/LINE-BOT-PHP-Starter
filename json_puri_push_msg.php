@@ -18,7 +18,11 @@ $response = $bot->pushMessage($sendto, $textMessageBuilder);
 $response = $bot->pushMessage('Ua2bdf85b0466beeb8c8af8fbccfba5df', $textMessageBuilder);
 
 // โอ๊ต ID U12fd0233ec75ef62153d1ee3b31f1037
+$jsonresponse = [
+    "success"=>true,
+    "feedback"=>"ส่งข้อความเรียบร้อย",
+    "bot_response"=>$response
+];
 
-
-echo "$text_send OK";
+echo json_encode($jsonresponse);
 ?>

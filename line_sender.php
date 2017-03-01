@@ -17,7 +17,7 @@
                 <h1 class="header">ระบบส่งข้อความ
                     <small>Puri line bot</small>
                 </h1>
-                <form action="json_puri_push_msg.php" method="post">
+                <form action="json_puri_push_msg.php" method="post" id="form_sender">
                     <div class="form-group">
                         <select id="sendto" name="sendto" class="form-control" required>
                             <option value=''>กรุณาเลือกผู้รับ</option>
@@ -47,6 +47,18 @@
     <script>
     $(document).ready(function(){
         $.material.init();
+
+        $("body").on("submit","#form_sender",function(e){
+            e.preventDefault();
+            var this_ = $(this);
+            var url = this_.attr('action');
+            var data = this_.serialize();
+            $.post(url,data,function(response){
+                var res = $.parseJson(response);
+                console.log(res.feedback);
+                console.log(res.bot_response);
+            })
+        });
     });
     </script>
 </body>
