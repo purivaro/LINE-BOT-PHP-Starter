@@ -2,6 +2,8 @@
 
 $access_token = '6tS7pO00ncfJFML6WrMEMXhtYru4rMFRapvH4qzPbxFp/2cf9dK6uxzzotYxyNMV51zGDZ23dznOogrpAhxNh3z881mOnyZ5M5mZVZPsyDj52DEvuJQZCf1u67UBBgkj+zrgPiD6n8Pd+lByPRTN0wdB04t89/1O/w1cDnyilFU=';
 
+require __DIR__."/vendor/autoload.php";
+
 
 // Get POST body content
 $content = file_get_contents('php://input');
