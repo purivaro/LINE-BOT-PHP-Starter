@@ -5,9 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel='stylesheet'>
-    <link href="bower_components/bootstrap-material-design/dist/bootstrap-material-design.min.css" rel='stylesheet'>
-    <link href="bower_components/bootstrap-material-design/dist/ripples.min.css" rel='stylesheet'>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel='stylesheet'>
+    <link href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css" rel='stylesheet'>
+    <link href="node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" rel='stylesheet'>
+    <link href="node_modules/bootstrap-material-design/dist/css/ripples.min.css" rel='stylesheet'>
 </head>
 <body>
     <div class="container">
@@ -80,9 +81,10 @@
 
 
 
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/boostrap.min.js"></script>
-    <script src="bower_components/bootstrap-material-design/dist/bootstrap-material-design.umd.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/boostrap.min.js"></script>
+    <script src="node_modules/bootstrap-material-design/dist/js/material.min.js"></script>
+    <script src="node_modules/bootstrap-material-design/dist/js/ripples.min.js"></script>
     <script>
     $(document).ready(function(){
         $.material.init();
