@@ -66,10 +66,13 @@
         var url = 'https://api.mlab.com/api/1/databases/puridb/collections/col_line_id?apiKey='+mongo_apikey;
         $.get(url,function(response){
             var res = $.parseJSON(response);
+            console.log(res);
+            /*
             $.each(res,function(i,v){
                 console.log(v.line_id);
                 console.log(v.nickname);
             });
+            */
         });
 
 
