@@ -64,7 +64,7 @@
             var url = this_.attr('action');
             var line_id = this_.find("#line_id").val();         
             var nickname = this_.find("#nickname").val();         
-            var data = JSON.stringify({line_id:line_id,nickname:nickname}});
+            var data = JSON.stringify({line_id:line_id,nickname:nickname});
             $.ajax({
                 type: 'POST',
                 url: url,
