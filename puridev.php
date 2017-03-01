@@ -19,7 +19,8 @@ try {
 foreach ($events as $event) {
         $reply_token = $event->getReplyToken();
         $text = $event->getText();
-        $bot->replyText($reply_token, $text);
+        $userId = $event->getUserId();
+        $bot->replyText($reply_token, $userId);
 
 }
 echo "OK";
