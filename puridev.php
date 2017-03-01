@@ -7,7 +7,6 @@ require __DIR__."/vendor/autoload.php";
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]);
 
-
 $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $body = file_get_contents("php://input");
 try {
@@ -21,11 +20,6 @@ foreach ($events as $event) {
         $text = $event->getText();
         $userId = $event->getUserId();
         $type = $event->getType();
-
-        if($type=="follow"){
-            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} add you as friend");
-            $response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
-        }
 
         $getProfileResponse = $bot->getProfile($userId);
         if ($getProfileResponse->isSucceeded()) {
