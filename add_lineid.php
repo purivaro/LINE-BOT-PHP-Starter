@@ -73,6 +73,9 @@
                 dataType: 'json',
                 success: function(response) { 
                     console.log(response); 
+                    toastr.success("บันทึกเรียบร้อย");
+                    $("#line_id").val('');         
+                    $("#nickname").val('');                        
                 }
             });
 
