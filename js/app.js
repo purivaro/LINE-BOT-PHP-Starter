@@ -33,21 +33,16 @@ $(document).ready(function(){
     //dbRefList.on('child_added',snap => console.log(snap.val()));
     // เมื่อมีการเพิ่ม child
     dbRefList.on('child_added',snap =>{
-        const li = document.createElement('li');
-        //li.innerText = snap.val();
-        //li.id = snap.key;
-        console.log(snap.val());
-        $('#sendto_firebase').append("<option value='"+555+"'>"+snap.val()+"</option>");
+        $('#sendto_firebase').append("<option value='"+snap.val().line_id+"' id='"+snap.key+"'  >"+snap.val().nickname+"</option>");
     });
     // เมื่อมีการแก้ไข child
     dbRefList.on('child_changed',snap => {
-        const liChanged = document.getElementById(snap.key);
-        liChanged.innerText = snap.val();
+        $('#'+snap.key).attr('value',snap.val().line_id).text(snap.val().nickname);
     });
     // เมื่อมีการลบ child
     dbRefList.on('child_removed',snap => {
-        const liRemoved = document.getElementById(snap.key);
-        liRemoved.remove();
+        const OptRemoved = document.getElementById(snap.key);
+        OptRemoved.remove();
     });
 
 
