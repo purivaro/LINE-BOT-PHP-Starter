@@ -28,7 +28,7 @@
 						<form action="json_puri_push_msg.php" method="post" id="form_sender">
 							<div class="form-group">
 								<select id="sendto" name="sendto" class="form-control" required>
-									<option value=''>กรุณาเลือกผู้รับ</option>
+									<option value=''>เลือกผู้รับ</option>
 									<!--<option value='U02a2cb394330d90571a21b09f2c230ea'>ลพ.ภูริ iPhone</option>
 									<option value='Ua2bdf85b0466beeb8c8af8fbccfba5df'>ลพ.ภูริ Android</option>
 									<option value='Ub1c272947e6de86751d7142334b88ca1'>เอ็กซ์</option>

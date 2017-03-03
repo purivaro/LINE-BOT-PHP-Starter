@@ -20,19 +20,11 @@ class ComposerStaticInit797b5c87dde5708c49d79661fc128733
         ),
     );
 
-    public static $classMap = array (
-        'Firebase\\Error' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseStub.php',
-        'Firebase\\FirebaseInterface' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseInterface.php',
-        'Firebase\\FirebaseLib' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseLib.php',
-        'Firebase\\FirebaseStub' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseStub.php',
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit797b5c87dde5708c49d79661fc128733::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit797b5c87dde5708c49d79661fc128733::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit797b5c87dde5708c49d79661fc128733::$classMap;
 
         }, null, ClassLoader::class);
     }
