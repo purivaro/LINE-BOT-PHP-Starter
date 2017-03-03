@@ -22,7 +22,7 @@ $(document).ready(function(){
 
     // Create references
     const dbRefObj = firebase.database().ref().child('object');
-    const dbRefList = dbRefObj.child('line_contact');
+    const dbRefList = dbRefObj.child('Line_contact');
 
     // sync object
     //dbRefObj.on('value',snap => console.log(snap.val()));
