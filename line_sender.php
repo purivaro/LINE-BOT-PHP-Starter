@@ -60,9 +60,6 @@
 	<script src="node_modules/bootstrap-material-design/dist/js/ripples.min.js"></script>
 	<script src="node_modules/toastr/build/toastr.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
-	<script src="js/app.js"></script>      
-	<script>
-
-	</script>
+	<script src="js/app.js"></script>
 </body>
 </html>
