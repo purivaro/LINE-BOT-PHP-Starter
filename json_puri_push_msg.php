@@ -15,6 +15,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHA
 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_send);
 $response = $bot->pushMessage($sendto, $textMessageBuilder);
 
+// ส่งข้อความมาที่เครื่อง samsung taba ด้วย
 $response = $bot->pushMessage('Ua2bdf85b0466beeb8c8af8fbccfba5df', $textMessageBuilder);
 
 // โอ๊ต ID U12fd0233ec75ef62153d1ee3b31f1037
