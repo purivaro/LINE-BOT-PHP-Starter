@@ -36,6 +36,11 @@
 									<option value='U27067457ab265d39046bd089d4711d8e'>จี๊ด</option>-->
 								</select>
 							</div>
+							<div class="form-group">
+								<select id="sendto_firebase" name="sendto_firebase" class="form-control" required>
+									<option value=''>เลือกผู้รับ</option>
+								</select>
+							</div>
 							<div class="inputs">
 								<div class="form-group label-floating">
 									<label for="text_send" class="control-label">พิมพ์ข้อความที่ต้องการส่ง</label>

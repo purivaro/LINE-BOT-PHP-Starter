@@ -18,10 +18,11 @@ $(document).ready(function(){
     // Get elements
     const preObject = document.getElementById('object');
     const ulList = document.getElementById('list');
+    const sendto_firebase = document.getElementById('sendto_firebase');
 
     // Create references
     const dbRefObj = firebase.database().ref().child('object');
-    const dbRefList = dbRefObj.child('hobbies');
+    const dbRefList = dbRefObj.child('line_contact');
 
     // sync object
     //dbRefObj.on('value',snap => console.log(snap.val()));
@@ -35,7 +36,7 @@ $(document).ready(function(){
         const li = document.createElement('li');
         li.innerText = snap.val();
         li.id = snap.key;
-        ulList.appendChild(li);
+        $('#sendto_firebase').append("<option value='"+555+"'>"+snap.val()+"</option>");
     });
     // เมื่อมีการแก้ไข child
     dbRefList.on('child_changed',snap => {
