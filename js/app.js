@@ -15,20 +15,11 @@ $(document).ready(function(){
     // Get a reference to the database service
     var database = firebase.database();
 
-    // Get elements
-    const preObject = document.getElementById('object');
-    const ulList = document.getElementById('list');
-    const sendto_firebase = document.getElementById('sendto_firebase');
 
     // Create references
     const dbRefObj = firebase.database().ref().child('object');
     const dbRefList = dbRefObj.child('Line_contact');
 
-    // sync object
-    //dbRefObj.on('value',snap => console.log(snap.val()));
-    dbRefObj.on('value',snap => {
-        preObject.innerText = JSON.stringify(snap.val(),null,3);
-    });
 
     //dbRefList.on('child_added',snap => console.log(snap.val()));
     // เมื่อมีการเพิ่ม child
@@ -46,7 +37,7 @@ $(document).ready(function(){
     });
 
 
-
+/*
     var mongo_apikey = 'JrLs9PiSVp8OfgZn_jbSdKCvO01BIbxx';
     var url = 'https://api.mlab.com/api/1/databases/puridb/collections/col_line_id?apiKey='+mongo_apikey;
     $.get(url,function(response){
@@ -59,6 +50,7 @@ $(document).ready(function(){
             $("#sendto").append("<option value='"+v.line_id+"'>"+v.nickname+"</option");
         });
     });
+*/
 
 
     $("body").on("submit","#form_sender",function(e){
