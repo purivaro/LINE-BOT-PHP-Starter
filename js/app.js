@@ -34,8 +34,9 @@ $(document).ready(function(){
     // เมื่อมีการเพิ่ม child
     dbRefList.on('child_added',snap =>{
         const li = document.createElement('li');
-        li.innerText = snap.val();
-        li.id = snap.key;
+        //li.innerText = snap.val();
+        //li.id = snap.key;
+        console.log(snap.val());
         $('#sendto_firebase').append("<option value='"+555+"'>"+snap.val()+"</option>");
     });
     // เมื่อมีการแก้ไข child
