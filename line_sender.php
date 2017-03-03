@@ -9,6 +9,14 @@
 	<link href="node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" rel='stylesheet'>
 	<link href="node_modules/bootstrap-material-design/dist/css/ripples.min.css" rel='stylesheet'>
 	<link href="node_modules/toastr/build/toastr.min.css" rel='stylesheet'>
+
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="node_modules/bootstrap-material-design/dist/js/material.min.js"></script>
+	<script src="node_modules/bootstrap-material-design/dist/js/ripples.min.js"></script>
+	<script src="node_modules/toastr/build/toastr.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+	<script src="js/app.js"></script>	
 </head>
 <body>
 	<div class="container">
@@ -59,12 +67,5 @@
 			</div>
 		</div>
 	</div>
-	<script src="node_modules/jquery/dist/jquery.min.js"></script>
-	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="node_modules/bootstrap-material-design/dist/js/material.min.js"></script>
-	<script src="node_modules/bootstrap-material-design/dist/js/ripples.min.js"></script>
-	<script src="node_modules/toastr/build/toastr.min.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
-	<script src="js/app.js"></script>
 </body>
 </html>
