@@ -5,35 +5,21 @@ $firebase = Firebase::fromServiceAccount(__DIR__.'/Puri-contact-f810e37143c7.jso
 $database = $firebase->getDatabase();
 
 $reference = $database->getReference('object/Line_contact');
-$value = $reference->getValue();
+//$value = $reference->getValue();
+
+
+$reference->orderByChild('line_id')
+    // returns all persons being exactly 1.98 (meters) tall
+    ->equalTo('Uf539dec2c746e3b8c869fa69e6a96e06')
+    ->getSnapshot();
+
+$value = $snapshot->getValue();
+
 echo json_encode($value);
+/*
 $reference->push([
         'title' => 'Post title',
         'body' => 'This should probably be longer.'
     ]);
-/*
-$url_ibs = "http://www.ibsone.com/project/linebot/puribot/api/translate.php";
-$text = 'ลิง';
-$lang = 'สเปน';
-
-$data_ibs = [
-'text'=> $text,
-'lang'=>$lang
-];
-
-$post_ibs = json_encode($data_ibs);
-$headers_ibs = ['Content-Type: application/json'];
-$ch_ibs = curl_init($url_ibs);
-curl_setopt($ch_ibs, CURLOPT_CUSTOMREQUEST, "POST");
-curl_setopt($ch_ibs, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch_ibs, CURLOPT_POSTFIELDS, $post_ibs);
-curl_setopt($ch_ibs, CURLOPT_HTTPHEADER, $headers_ibs);
-curl_setopt($ch_ibs, CURLOPT_FOLLOWLOCATION, 1);
-$result_ibs = curl_exec($ch_ibs);
-curl_close($ch_ibs);
-
-$res = json_decode($result_ibs,true);
-$result = $res['result'];
-echo $result;
 */
 ?>
