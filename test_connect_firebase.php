@@ -10,7 +10,7 @@ $reference = $database->getReference('object/Line_contact');
 
 $snapshot = $reference->orderByChild("nickname")->equalTo("พี่ยุ้ย");
 
-//$value = $snapshot->getValue();
+$value = $snapshot->getValue();
 
 //echo json_encode($value);
 /*
