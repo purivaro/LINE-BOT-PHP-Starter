@@ -1,9 +1,9 @@
 <?php
 require __DIR__."/firebase-php-master/src/Firebase.php";
-
+/*
 $firebase = Firebase::fromServiceAccount(__DIR__.'/google-service-account.json');
 $database = $firebase->getDatabase();
-
+*/
 /*
 $url_ibs = "http://www.ibsone.com/project/linebot/puribot/api/translate.php";
 $text = 'ลิง';
@@ -29,5 +29,5 @@ $res = json_decode($result_ibs,true);
 $result = $res['result'];
 echo $result;
 */
-echo "Hello";
+echo "Hello2";
 ?>
