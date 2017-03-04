@@ -4,11 +4,13 @@ require __DIR__."/vendor/autoload.php";
 $firebase = Firebase::fromServiceAccount(__DIR__.'/Puri-contact-f810e37143c7.json');
 $database = $firebase->getDatabase();
 
-$reference = $database->getReference('object/Line_contact');
+//$reference = $database->getReference('object/Line_contact');
+$reference = $database->getReference('line');
 //$value = $reference->getValue(); 
 
 
-$snapshot = $reference->orderByChild("line_id")->equalTo("Ub1c272947e6de86751d7142334b88ca1")->getSnapshot();
+//$snapshot = $reference->orderByChild("line_id")->equalTo("Ub1c272947e6de86751d7142334b88ca1")->getSnapshot();
+$snapshot = $reference->orderByChild("line_id")->equalTo("kkk")->getSnapshot();
 
 $value = $snapshot->getValue();
 
