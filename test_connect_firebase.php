@@ -8,7 +8,7 @@ $reference = $database->getReference('object/Line_contact');
 //$value = $reference->getValue();
 
 
-$value = $reference->orderByChild('line_id')->equalTo('Uf539dec2c746e3b8c869fa69e6a96e06')->getSnapshot();
+$value = $reference->orderByChild('line_id')->equalTo('Uf539dec2c746e3b8c869fa69e6a96e06')->getValue();
 //$snapshot = $reference->orderByChild('line_id')->equalTo('Uf539dec2c746e3b8c869fa69e6a96e06')->getSnapshot();
 /*
 $value = $snapshot->getValue();
