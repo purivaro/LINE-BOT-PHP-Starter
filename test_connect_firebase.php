@@ -5,7 +5,7 @@ $firebase = Firebase::fromServiceAccount(__DIR__.'/Puri-contact-f810e37143c7.jso
 $database = $firebase->getDatabase();
 
 $reference = $database->getReference('object/Line_contact');
-//$value = $reference->getValue();
+//$value = $reference->getValue(); 
 
 
 $snapshot = $reference->orderByChild("nickname")->equalTo("พี่ยุ้ย")->getSnapshot();
