@@ -1,12 +1,12 @@
 <?php
 require __DIR__."/vendor/autoload.php";
-
+/*
 $firebase = Firebase::fromServiceAccount(__DIR__.'/Puri-contact-f810e37143c7.json');
 $database = $firebase->getDatabase();
 
 $reference = $database->getReference('object/Line_contact');
 $value = $reference->getValue();
-print_r($value);
+print_r($value);*/
 /*
 $url_ibs = "http://www.ibsone.com/project/linebot/puribot/api/translate.php";
 $text = 'ลิง';
@@ -32,5 +32,5 @@ $res = json_decode($result_ibs,true);
 $result = $res['result'];
 echo $result;
 */
-echo "Hello2";
+echo "Hello3";
 ?>
