@@ -10,9 +10,9 @@ $reference = $database->getReference('object/Line_contact');
 
 $snapshot = $reference->orderByChild("nickname")->equalTo("พี่ยุ้ย")->getSnapshot();
 
-$value = $snapshot->getValue();
+//$value = $snapshot->getValue();
 
-echo json_encode($value);
+//echo json_encode($value);
 /*
 $reference->push([
         'title' => 'Post title',
