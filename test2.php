@@ -1,7 +1,7 @@
 <?php
 require __DIR__."/firebase-php-master/src/Firebase.php";
 
-$firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-b8f7f91459.json');
+$firebase = Firebase::fromServiceAccount(__DIR__.'/Puri-contact-f810e37143c7.json');
 $database = $firebase->getDatabase();
 /*
 $reference = $database->getReference('object/Line_contact');
