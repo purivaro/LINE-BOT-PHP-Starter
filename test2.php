@@ -1,5 +1,5 @@
 <?php
-require __DIR__."/firebase-php-master/src/Firebase.php";
+require __DIR__."/vendor/autoload.php";
 
 $firebase = Firebase::fromServiceAccount(__DIR__.'/Puri-contact-f810e37143c7.json');
 $database = $firebase->getDatabase();
