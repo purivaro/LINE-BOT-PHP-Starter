@@ -1,9 +1,12 @@
 <?php
 require __DIR__."/firebase-php-master/src/Firebase.php";
-/*
-$firebase = Firebase::fromServiceAccount(__DIR__.'/google-service-account.json');
+
+$firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-b8f7f91459.json');
 $database = $firebase->getDatabase();
-*/
+
+$reference = $database->getReference('object/Line_contact');
+$value = $reference->getValue();
+print_r($value);
 /*
 $url_ibs = "http://www.ibsone.com/project/linebot/puribot/api/translate.php";
 $text = 'ลิง';
