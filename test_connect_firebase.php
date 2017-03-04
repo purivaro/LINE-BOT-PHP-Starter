@@ -8,7 +8,7 @@ $reference = $database->getReference('object/Line_contact');
 //$value = $reference->getValue(); 
 
 
-$snapshot = $reference->orderByChild("nickname")->equalTo("พี่ยุ้ย")->getSnapshot();
+$snapshot = $reference->orderByChild("nickname")->equalTo("พี่ยุ้ย");
 
 //$value = $snapshot->getValue();
 
