@@ -6,7 +6,7 @@ $database = $firebase->getDatabase();
 
 $reference = $database->getReference('object/Line_contact');
 $value = $reference->getValue();
-print_r($value);
+echo json_encode($value);
 /*
 $url_ibs = "http://www.ibsone.com/project/linebot/puribot/api/translate.php";
 $text = 'ลิง';
@@ -32,5 +32,4 @@ $res = json_decode($result_ibs,true);
 $result = $res['result'];
 echo $result;
 */
-echo "Hello1";
 ?>
