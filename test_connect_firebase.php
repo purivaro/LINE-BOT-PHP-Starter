@@ -6,14 +6,14 @@ $database = $firebase->getDatabase();
 
 //$reference = $database->getReference('object/Line_contact');
 $reference = $database->getReference('line');
-$value = $database->getReference('line')->getChildKeys();
+//$value = $database->getReference('line')->getChildKeys();
 //$value = $reference->getValue(); 
 
 
 //$snapshot = $reference->orderByChild("line_id")->equalTo("Ub1c272947e6de86751d7142334b88ca1")->getSnapshot();
-//$snapshot = $reference->orderByChild("line_id")->equalTo("kkk")->getSnapshot();
+$snapshot = $reference->orderByChild("line_id")->getSnapshot();
 
-//$value = $snapshot->getValue();
+$value = $snapshot->getValue();
 
 echo json_encode($value);
 /*
