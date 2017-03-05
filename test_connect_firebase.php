@@ -18,9 +18,9 @@ $filter = 222;
 //$value = $snapshot->getValue();
 
 //$value = $reference->orderByChild("line_id")->equalTo("Ub1c272947e6de86751d7142334b88ca1")->getValue();
-//$value = $reference->orderByChild("line_id")->equalTo(123)->getValue();
+$value = $reference->orderByChild("line_id")->equalTo(123)->getSnapshot();
 
-echo json_encode($value);
+//echo json_encode($value);
 /*
 $reference->push([
         'title' => 'Post title',
