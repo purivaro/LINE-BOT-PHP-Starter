@@ -20,6 +20,7 @@ foreach ($events as $event) {
 	$text = $event->getText();
 	$userId = $event->getUserId();
 	$type = $event->getType();
+	$timestamp = $event->getTimestamp();
 
 	$getProfileResponse = $bot->getProfile($userId);
 	if ($getProfileResponse->isSucceeded()) {
@@ -67,8 +68,17 @@ foreach ($events as $event) {
 	}else{
 		// ถ้าลงทะเบียนแล้ว
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("คุณ".$displayName." ลงทะเบียนเรียบร้อยแล้ว");
-		$messages->add($_msg);     
+		$messages->add($_msg);
 
+		$chat_history = $database->getReference('line/chat_history/puri_dev');
+		if($type=='sticker'){$text="sticker send";}	
+		$chat_history->push([
+				'line_id' => $userId,
+				'pictureUrl' => $pictureUrl,
+				'displayName' => $displayName,
+				'text' => $text,
+				'timestamp' => $timestamp,
+		]);
 	}
 
 
