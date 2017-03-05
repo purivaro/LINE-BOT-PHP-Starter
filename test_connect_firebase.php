@@ -8,19 +8,27 @@ $reference = $database->getReference('object/Line_contact');
 //$reference = $database->getReference('line');
 //$value = $database->getReference('line')->getChildKeys();
 //$value = $reference->getChildKeys(); 
-//$value = $reference->getValue(); 
+$data = $reference->getValue(); 
 
-$filter = 222;
+$filter = 'Ub1c272947e6de86751d7142334b88ca1';
 
-$snapshot = $reference->orderByChild("line_id")->equalTo('Ub1c272947e6de86751d7142334b88ca1')->getSnapshot();
+foreach($data as $value){
+    if($filter==$value['line_id']){$duplicate = true;}
+}
+
+if($duplicate){
+    echo "Have already";
+}
+
+//$snapshot = $reference->orderByChild("line_id")->equalTo('Ub1c272947e6de86751d7142334b88ca1')->getSnapshot();
 //$snapshot = $reference->orderByChild("line_id")->equalTo($filter)->getSnapshot();
 
-$value = $snapshot->getValue();
+//$value = $snapshot->getValue();
 
 //$value = $reference->orderByChild("line_id")->equalTo("Ub1c272947e6de86751d7142334b88ca1")->getValue();
 //$value = $reference->orderByChild("line_id")->equalTo(123)->getSnapshot();
 
-echo json_encode($value);
+//echo json_encode($value);
 /*
 $reference->push([
         'title' => 'Post title',
