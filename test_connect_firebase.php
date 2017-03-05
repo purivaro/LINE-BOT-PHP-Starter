@@ -4,7 +4,7 @@ require __DIR__."/vendor/autoload.php";
 $firebase = Firebase::fromServiceAccount(__DIR__.'/Puri-contact-f810e37143c7.json');
 $database = $firebase->getDatabase();
 
-$reference = $database->getReference('object')->getReference('Line_contact');
+$reference = $database->getReference('object/Line_contact');
 //$reference = $database->getReference('line');
 //$value = $database->getReference('line')->getChildKeys();
 $value = $reference->getChildKeys(); 
