@@ -10,7 +10,7 @@ $reference = $database->getReference('object/Line_contact');
 //$value = $reference->getChildKeys(); 
 $data = $reference->getValue(); 
 
-$filter = 'Ub1c272947e6de86751d7142334b88ca1';
+$filter = 'Ub1c272947e6de856751d7142334b88ca1';
 
 foreach($data as $value){
     if($filter==$value['line_id']){$duplicate = true;}
