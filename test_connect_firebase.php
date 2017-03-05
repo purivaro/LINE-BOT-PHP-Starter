@@ -7,8 +7,8 @@ $database = $firebase->getDatabase();
 $reference = $database->getReference('object/Line_contact');
 //$reference = $database->getReference('line');
 //$value = $database->getReference('line')->getChildKeys();
-$value = $reference->getChildKeys(); 
-//$value = $reference->getValue(); 
+//$value = $reference->getChildKeys(); 
+$value = $reference->getValue(); 
 
 $filter = 222;
 
