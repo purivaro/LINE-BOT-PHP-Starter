@@ -52,7 +52,9 @@ foreach ($events as $event) {
 		// ถ้ายังไม่ลงทะเบียน ก็ลงทะเบียนให้ โดยส่งค่าไปบันทึกใน firebase
 		$reference->push([
 				'line_id' => $userId,
-				'nickname' => $displayName
+				'nickname' => $text,
+				'pictureUrl' => $pictureUrl,
+				'displayName' => $displayName
 		]);
 
 		// จากนั้นส่งข้อความตอบกลับไป
