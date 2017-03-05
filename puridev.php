@@ -69,6 +69,8 @@ foreach ($events as $event) {
 		// ถ้าลงทะเบียนแล้ว
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("คุณ".$displayName." ลงทะเบียนเรียบร้อยแล้ว");
 		$messages->add($_msg);
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ข้อความที่คุณส่งมา จะรวมอยู่ที่นี่ https://puri-contact.firebaseapp.com/line_chat_puridev.html");
+		$messages->add($_msg);
 
 		$chat_history = $database->getReference('line/chat_history/puri_dev');
 		if($type=='sticker'){$text="sticker send";}	
