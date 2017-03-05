@@ -77,7 +77,7 @@ foreach ($events as $event) {
 				'pictureUrl' => $pictureUrl,
 				'displayName' => $displayName,
 				'text' => $text,
-				'timestamp' => $timestamp,
+				'timestamp' => $timestamp
 		]);
 	}
 
