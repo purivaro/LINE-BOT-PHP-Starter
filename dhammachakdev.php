@@ -54,7 +54,9 @@ foreach ($events as $event) {
 		]);
 	}
 
-	$text_received = intval($text_received);
+	function int($s){return(int)preg_replace('/[^\-\d]*(\-?\d*).*/','$1',$s);}
+
+	$text_received = int($text_received);
 
 	// ถ้าสิ่งที่ส่งมาเป็นตัวเลข
 	if(is_int($text_received)){
