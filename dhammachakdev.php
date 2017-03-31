@@ -96,7 +96,7 @@ foreach ($events as $event) {
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("อนุโมทนาบุญด้วยนะคะ คุณ".$displayName);
 		$messages->add($_msg);     	
 	}else{
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("กรุณาส่งเฉพาะตัวเลข เพื่อบันทึกยอดสวด หรือ ถ้าจะดูยอดทั้งหมดที่ส่งไปแล้ว ให้พิมพ์ว่า \"ยอดรวม\" นะคะ คุณ".$displayName);
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("กรุณาส่งเฉพาะตัวเลข เพื่อบันทึกยอดสวด \nหรือ ถ้าจะดูยอดทั้งหมดที่ส่งไปแล้ว  \n\n ให้พิมพ์ว่า \"ยอดรวม\" นะคะ คุณ".$displayName);
 		$messages->add($_msg);     
 	}
 
