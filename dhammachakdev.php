@@ -102,7 +102,7 @@ foreach ($events as $event) {
 
 
 
-		$last_round_ref = $database->getReference('dhammachak/chants/'.$userId)->orderByChild('timestamp')->limitToLast(1);
+		$last_round_ref = $database->getReference('dhammachak/chants/'.$userId)->orderByChild('timestamp')->limitToLast(1)->getSnapshot();
 		$round_data = $last_round_ref->getValue(); 
 
 		$last_round = 0;
