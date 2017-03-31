@@ -95,15 +95,8 @@ foreach ($events as $event) {
 		$messages->add($_msg);     
 	}
 
-
-
-
 	$response = $bot->replyMessage($reply_token, $messages);
 
-/*
-	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} : {$displayName} : {$text_received}");
-	$response = $bot->pushMessage('U3c02f02d470aac70e331fcb0fe1eae3c', $textMessageBuilder);
-*/
 	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
 
