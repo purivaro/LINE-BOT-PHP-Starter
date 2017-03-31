@@ -72,7 +72,7 @@ foreach ($events as $event) {
 			$messages->add($_msg);     
 		}
 
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดที่คุณส่ง คือ ".$text_received." จบ  \n บันทึกเรียบร้อยค่ะ");
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดที่คุณส่ง คือ ".$text_received." จบ  \n**บันทึกเรียบร้อยค่ะ**");
 		$messages->add($_msg);
 
 		$chants = $database->getReference('dhammachak/chants');
