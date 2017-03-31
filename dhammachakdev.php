@@ -15,6 +15,7 @@ try {
   var_dump($e); 
 }
 
+
 foreach ($events as $event) {
 	$reply_token = $event->getReplyToken();
 	$text_received = $event->getText();
@@ -30,7 +31,39 @@ foreach ($events as $event) {
 	    $statusMessage =  $profile['statusMessage'];
 	}
 
+
 	$messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
+
+	$url_vstar = "https://www.vstarproject.com/project/linebot/dhammachak/api.php";
+
+	$data_vstar = [
+	'line_id'=> $userId,
+	'text_type'=> $type,
+	'text_received'=> $text_received,
+	'timestamp'=> $timestamp,
+	'displayName'=> $displayName,
+	'pictureUrl'=> $pictureUrl,
+	'statusMessage'=> $statusMessage
+	];
+
+	$post_vstar = json_encode($data_vstar);
+	$headers_vstar = ['Content-Type: application/json'];
+	$ch_vstar = curl_init($url_vstar);
+	curl_setopt($ch_vstar, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch_vstar, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch_vstar, CURLOPT_POSTFIELDS, $post_vstar);
+	curl_setopt($ch_vstar, CURLOPT_HTTPHEADER, $headers_vstar);
+	curl_setopt($ch_vstar, CURLOPT_FOLLOWLOCATION, 1);
+	$result_vstar = curl_exec($ch_vstar);
+	curl_close($ch_vstar);
+
+	$res = json_decode($result_vstar,true);
+
+    $message_vstar = $res['message'];
+
+	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message_vstar );
+	$messages->add($_msg);
+
 
 
 	$firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-fa656ae233.json');
@@ -57,6 +90,7 @@ foreach ($events as $event) {
 	$round_received = int($text_received);
 
 	$round_limit = 500;
+
 
 	// ถ้าสิ่งที่ส่งมาเป็นตัวเลข และไม่เกิน limit
 	if(is_int($round_received) && $round_received > 0 && $round_received <= $round_limit){
