@@ -75,7 +75,7 @@ foreach ($events as $event) {
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดที่คุณส่งล่าสุด คือ ".$text_received." จบ  \n\n**บันทึกเรียบร้อยค่ะ**");
 		$messages->add($_msg);
 
-		$chants = $database->getReference('dhammachak/chants');
+		$chants = $database->getReference('dhammachak/chants/'.$userId.'/');
 
 		$chants->push([
 				'line_id' => $userId,
