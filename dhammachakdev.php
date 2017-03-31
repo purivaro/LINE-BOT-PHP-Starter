@@ -60,15 +60,7 @@ foreach ($events as $event) {
 
 	// ถ้าสิ่งที่ส่งมาเป็นตัวเลข และไม่เกิน limit
 	if(is_int($round_received) && $round_received > 0 && $round_received <= $round_limit){
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขออนุโมทนาบุญกับการส่งยอดนะคะ คุณ".$displayName);
-		$messages->add($_msg);     
-
-		if(!$registed){
-			$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$statusMessage");
-			$messages->add($_msg);     
-		}
-
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดที่คุณส่งล่าสุด คือ ".$text_received." จบ  \n\n**บันทึกเรียบร้อยค่ะ**");
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขออนุโมทนาบุญกับการส่งยอดนะคะ คุณ".$displayName."\n\nยอดที่คุณส่งล่าสุด คือ ".$text_received." จบ  \n\n**บันทึกเรียบร้อยค่ะ**");
 		$messages->add($_msg);
 
 		$chants = $database->getReference('dhammachak/chants/'.$userId);
