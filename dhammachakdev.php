@@ -103,10 +103,11 @@ foreach ($events as $event) {
 		$database->getReference('dhammachak/chants/'.$userId)->orderByChild('timestamp')->limitToLast('1')->remove();
 		///$round_data = $last_round_ref->getValue(); 
 /*
-		$last_round = 0;
+
 		$last_round = $round_data[0]['round'];
 	*/	
-
+		$last_round = 555;
+		
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ลบยอดล่าสุดของท่าน คือ \n\n ".number_format($last_round)." จบ \n\n เรียบร้อยค่ะ");
 		$messages->add($_msg);
 
