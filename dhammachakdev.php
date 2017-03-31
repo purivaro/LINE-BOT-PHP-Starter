@@ -78,7 +78,7 @@ foreach ($events as $event) {
 				'pictureUrl' => $pictureUrl,
 				'displayName' => $displayName,
 				'round' => $text_received,
-				'timestamp' => $timestamp
+				'line_timestamp' => $timestamp
 		]);
 
 	}elseif(is_int($round_received) && $round_received > $round_limit){
@@ -100,13 +100,13 @@ foreach ($events as $event) {
 
 	}elseif($text_received == "ยกเลิก"){
 
-		$database->getReference('dhammachak/chants/'.$userId)->orderByChild('timestamp')->limitToLast('1')->remove();
-		///$round_data = $last_round_ref->getValue(); 
-/*
+		$database->getReference('dhammachak/chants/'.$userId)->orderByChild('line_timestamp')->limitToLast('1')->getSnapshot();
+		$round_data = $last_round_ref->getValue(); 
+
 
 		$last_round = $round_data[0]['round'];
-	*/	
-		$last_round = 555;
+	
+	//	$last_round = 555;
 
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ลบยอดล่าสุดของท่าน คือ \n\n ".number_format($last_round)." จบ \n\n เรียบร้อยค่ะ");
 		$messages->add($_msg);
