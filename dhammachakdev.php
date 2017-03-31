@@ -54,6 +54,7 @@ foreach ($events as $event) {
 		]);
 	}
 
+	$text_received = intval($text_received);
 
 	// ถ้าสิ่งที่ส่งมาเป็นตัวเลข
 	if(is_int($text_received)){
@@ -88,10 +89,10 @@ foreach ($events as $event) {
 
 	$response = $bot->replyMessage($reply_token, $messages);
 
-
+/*
 	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} : {$displayName} : {$text_received}");
 	$response = $bot->pushMessage('U3c02f02d470aac70e331fcb0fe1eae3c', $textMessageBuilder);
-
+*/
 	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
 
