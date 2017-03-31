@@ -100,7 +100,7 @@ foreach ($events as $event) {
 
 	}elseif($text_received == "ยกเลิก"){
 
-//		$database->getReference('dhammachak/chants/'.$userId)->orderByChild('timestamp')->limitToLast('1')->remove();
+		$database->getReference('dhammachak/chants/'.$userId)->orderByChild('timestamp')->limitToLast('1')->remove();
 		///$round_data = $last_round_ref->getValue(); 
 /*
 
