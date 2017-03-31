@@ -91,9 +91,9 @@ foreach ($events as $event) {
 			$sum_round += int($value['round']);
 		}
 
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดรวมทั้งหมดที่ส่งมาแล้วของคุณ ".$displayName." คือ ".number_format($sum_round)." จบ");
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดรวมทั้งหมดที่ส่งมาแล้วของคุณ ".$displayName." คือ \n ".number_format($sum_round)." จบ \n\nขอกราบอนุโมทนาบุญด้วยนะคะ");
 		$messages->add($_msg);
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("อนุโมทนาบุญด้วยนะคะ คุณ".$displayName);
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder(" คุณ".$displayName);
 		$messages->add($_msg);     	
 	}else{
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("กรุณาส่งเฉพาะตัวเลข เพื่อบันทึกยอดสวด \nหรือ ถ้าจะดูยอดทั้งหมดที่ส่งไปแล้ว  \n\n ให้พิมพ์ว่า \"ยอดรวม\" นะคะ คุณ".$displayName);
