@@ -64,7 +64,7 @@ foreach ($events as $event) {
 	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message_vstar );
 	$messages->add($_msg);
 
-
+/*
 
 	$firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-fa656ae233.json');
 	$database = $firebase->getDatabase();
@@ -79,7 +79,6 @@ foreach ($events as $event) {
 
 
 	if(!$registed){
-		// ถ้ายังไม่ลงทะเบียน ก็ลงทะเบียนให้ โดยส่งค่าไปบันทึกใน firebase
 		$reference->push([
 				'line_id' => $userId,
 				'pictureUrl' => $pictureUrl,
@@ -91,8 +90,6 @@ foreach ($events as $event) {
 
 	$round_limit = 500;
 
-
-	// ถ้าสิ่งที่ส่งมาเป็นตัวเลข และไม่เกิน limit
 	if(is_int($round_received) && $round_received > 0 && $round_received <= $round_limit){
 
 		$chants = $database->getReference('dhammachak/chants/'.$userId);
@@ -101,7 +98,7 @@ foreach ($events as $event) {
 				'line_id' => $userId,
 				'pictureUrl' => $pictureUrl,
 				'displayName' => $displayName,
-				'round' => $text_received,
+				'round' => $round_received,
 				'line_timestamp' => $timestamp
 		]);
 
@@ -142,8 +139,6 @@ foreach ($events as $event) {
 
 		$last_round = $round_data[0]['round'];
 	
-	//	$last_round = 555;
-
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ลบยอดล่าสุดของท่าน คือ \n\n ".number_format($last_round)." จบ \n\n เรียบร้อยค่ะ");
 		$messages->add($_msg);
 
@@ -151,6 +146,7 @@ foreach ($events as $event) {
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("กรุณาส่งเฉพาะตัวเลข เพื่อบันทึกยอดสวด\n\nหรือถ้าจะดูยอดทั้งหมดที่ส่งไปแล้ว  \n\nให้พิมพ์ว่า \"ยอดรวม\" นะคะ คุณ".$displayName);
 		$messages->add($_msg);     
 	}
+*/
 
 	$response = $bot->replyMessage($reply_token, $messages);
 
