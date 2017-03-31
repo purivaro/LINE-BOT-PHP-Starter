@@ -54,12 +54,16 @@ foreach ($events as $event) {
 		]);
 	}
 
+	// เช็คยอดรวมที่เคยส่งมาแล้ว
+	$sum_round = 50000;
+
+
 	function int($s){return(int)preg_replace('/[^\-\d]*(\-?\d*).*/','$1',$s);}
 
-	$text_received = int($text_received);
+	$round_received = int($text_received);
 
 	// ถ้าสิ่งที่ส่งมาเป็นตัวเลข
-	if(is_int($text_received)){
+	if(is_int($round_received) && $round_received > 0){
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("อนุโมทนากับการส่งยอดนะคะ คุณ".$displayName);
 		$messages->add($_msg);     
 
@@ -81,6 +85,11 @@ foreach ($events as $event) {
 				'timestamp' => $timestamp
 		]);
 
+	}elseif($text_received == "ยอดรวม"){
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดรวมทั้งหมดที่ส่งมาแล้ว ของคุณ ".$displayName." คือ $sum_round จบ");
+		$messages->add($_msg);
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("อนุโมทนาบุญด้วยนะคะ คุณ".$displayName);
+		$messages->add($_msg);     	
 	}else{
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("กรุณาส่งเฉพาะตัวเลข เพื่อบันทึกยอดสวด หรือ ถ้าจะดูยอดทั้งหมดที่ส่งไปแล้ว ให้พิมพ์ว่า \"ยอดรวม\" นะคะ คุณ".$displayName);
 		$messages->add($_msg);     
