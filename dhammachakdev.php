@@ -36,7 +36,7 @@ foreach ($events as $event) {
 	$firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-fa656ae233.json');
 	$database = $firebase->getDatabase();
 
-	$reference = $database->getReference('dhammachak/Line_contact');
+	$reference = $database->getReference('dhammachak/contacts');
 	$data = $reference->getValue(); 
 
 
