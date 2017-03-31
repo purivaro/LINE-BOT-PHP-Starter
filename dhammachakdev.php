@@ -100,14 +100,12 @@ foreach ($events as $event) {
 
 	}elseif($text_received == "ยกเลิก"){
 
-
-
 		$last_round_ref = $database->getReference('dhammachak/chants/'.$userId)->orderByChild('timestamp')->limitToLast(1)->getSnapshot();
 		$round_data = $last_round_ref->getValue(); 
-
+/*
 		$last_round = 0;
 		$last_round = $round_data[0]['round'];
-		
+	*/	
 
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ลบยอดล่าสุดของท่าน คือ \n\n ".number_format($last_round)." จบ \n\n เรียบร้อยค่ะ");
 		$messages->add($_msg);
