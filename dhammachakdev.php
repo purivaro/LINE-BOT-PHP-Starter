@@ -56,8 +56,10 @@ foreach ($events as $event) {
 
 	$round_received = int($text_received);
 
+	$round_limit = 500;
+
 	// ถ้าสิ่งที่ส่งมาเป็นตัวเลข
-	if(is_int($round_received) && $round_received > 0){
+	if(is_int($round_received) && $round_received > 0 && $round_received <= $round_limit){
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขออนุโมทนาบุญกับการส่งยอดนะคะ คุณ".$displayName);
 		$messages->add($_msg);     
 
@@ -78,7 +80,9 @@ foreach ($events as $event) {
 				'round' => $text_received,
 				'timestamp' => $timestamp
 		]);
-
+	}elseif(is_int($round_received) && $round_received > $round_limit){
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ท่านสามารถส่งยอดได้ ไม่เกินครั้งละ $round_limit จบนะคะ \n\n กรุณาส่งใหม่อีกครั้งค่ะ คุณ".$displayName);
+		$messages->add($_msg);     		
 	}elseif($text_received == "ยอดรวม"){
 
 
