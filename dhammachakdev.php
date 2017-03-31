@@ -82,7 +82,7 @@ foreach ($events as $event) {
 		]);
 
 	}else{
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("กรุณาส่งเฉพาะตัวเลข เพื่อบันทึกยอดสวด หรือ พิมพ์ว่า ยอดรวม หากท่านอยากดูยอดรวมนะคะ คุณ".$displayName);
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("กรุณาส่งเฉพาะตัวเลข เพื่อบันทึกยอดสวด หรือ ถ้าจะดูยอดทั้งหมดที่ส่งไปแล้ว ให้พิมพ์ว่า \"ยอดรวม\" นะคะ คุณ".$displayName);
 		$messages->add($_msg);     
 	}
 
