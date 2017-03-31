@@ -79,7 +79,7 @@ foreach ($events as $event) {
 			$sum_round += int($value['round']);
 		}
 
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขออนุโมทนาบุญกับการส่งยอดนะคะ คุณ".$displayName."\n\nยอดที่คุณส่งล่าสุด คือ ".$round_received." จบ  \n\n**บันทึกเรียบร้อยค่ะ* \n\n(ยอดรวมทั้งหมด ".number_format($sum_round)." จบ)");
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขออนุโมทนาบุญกับการส่งยอดนะคะ คุณ".$displayName."\n\nยอดที่คุณส่งล่าสุด คือ ".$round_received." จบ  \n\n**บันทึกเรียบร้อยค่ะ** \n\n(ยอดรวมทั้งหมด ".number_format($sum_round)." จบ)");
 		$messages->add($_msg);
 
 
