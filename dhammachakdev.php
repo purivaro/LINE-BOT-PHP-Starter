@@ -54,12 +54,6 @@ foreach ($events as $event) {
 		]);
 	}
 
-	// เช็คยอดรวมที่เคยส่งมาแล้ว
-	$sum_round = 50000;
-
-
-	function int($s){return(int)preg_replace('/[^\-\d]*(\-?\d*).*/','$1',$s);}
-
 	$round_received = int($text_received);
 
 	// ถ้าสิ่งที่ส่งมาเป็นตัวเลข
@@ -75,7 +69,7 @@ foreach ($events as $event) {
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดที่คุณส่งล่าสุด คือ ".$text_received." จบ  \n\n**บันทึกเรียบร้อยค่ะ**");
 		$messages->add($_msg);
 
-		$chants = $database->getReference('dhammachak/chants/'.$userId.'/');
+		$chants = $database->getReference('dhammachak/chants/'.$userId);
 
 		$chants->push([
 				'line_id' => $userId,
@@ -86,6 +80,17 @@ foreach ($events as $event) {
 		]);
 
 	}elseif($text_received == "ยอดรวม"){
+
+
+
+		$round_ref = $database->getReference('dhammachak/chants/'.$userId);
+		$round_data = $round_ref->getValue(); 
+
+		$sum_round = 0;
+		foreach($round_data as $value){
+			$sum_round += int($value['round']);
+		}
+
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดรวมทั้งหมดที่ส่งมาแล้วของคุณ ".$displayName." คือ $sum_round จบ");
 		$messages->add($_msg);
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("อนุโมทนาบุญด้วยนะคะ คุณ".$displayName);
@@ -103,4 +108,7 @@ foreach ($events as $event) {
 }
 
 echo "OK";
+
+/// ฟังก์ชัน เปลี่ยนข้อความเป็นตัวเลข
+function int($s){return(int)preg_replace('/[^\-\d]*(\-?\d*).*/','$1',$s);}
 ?>
