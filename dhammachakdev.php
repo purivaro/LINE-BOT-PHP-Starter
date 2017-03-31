@@ -17,7 +17,7 @@ try {
 
 foreach ($events as $event) {
 	$reply_token = $event->getReplyToken();
-	$text = $event->getText();
+	$text_received = $event->getText();
 	$userId = $event->getUserId();
 	$type = $event->getType();
 	$timestamp = $event->getTimestamp();
@@ -45,45 +45,51 @@ foreach ($events as $event) {
 	}
 
 
-	
 	if(!$registed){
 		// ถ้ายังไม่ลงทะเบียน ก็ลงทะเบียนให้ โดยส่งค่าไปบันทึกใน firebase
 		$reference->push([
 				'line_id' => $userId,
-				'nickname' => $text,
 				'pictureUrl' => $pictureUrl,
 				'displayName' => $displayName
 		]);
+	}
 
-		// จากนั้นส่งข้อความตอบกลับไป
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขอบคุณที่ลงทะเบียน คุณ".$displayName);
+
+	// ถ้าสิ่งที่ส่งมาเป็นตัวเลข
+	if(is_int($text_received)){
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("อนุโมทนากับการส่งยอดนะคะ คุณ".$displayName);
 		$messages->add($_msg);     
 
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$statusMessage");
-		$messages->add($_msg);     
+		if(!$registed){
+			$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$statusMessage");
+			$messages->add($_msg);     
+		}
 
-	}else{
-		// ถ้าลงทะเบียนแล้ว
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("คุณ".$displayName." ลงทะเบียนเรียบร้อยแล้ว");
-		$messages->add($_msg);
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ข้อความที่คุณส่งมา จะรวมอยู่ที่นี่ https://puri-contact.firebaseapp.com/line_chat_puridev.html");
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดที่คุณส่ง คือ ".$text_received." จบ  \n บันทึกเรียบร้อยค่ะ");
 		$messages->add($_msg);
 
-		$chat_history = $database->getReference('dhammachak/chat_history');
-		if($type=='sticker'){$text="sticker send";}	
-		$chat_history->push([
+		$chants = $database->getReference('dhammachak/chants');
+
+		$chants->push([
 				'line_id' => $userId,
 				'pictureUrl' => $pictureUrl,
 				'displayName' => $displayName,
-				'text' => $text,
+				'round' => $text_received,
 				'timestamp' => $timestamp
 		]);
+
+	}else{
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("กรุณาส่งเฉพาะตัวเลข เพื่อบันทึกยอดสวด หรือ พิมพ์ว่า ยอดรวม หากท่านอยากดูยอดรวมนะคะ คุณ".$displayName);
+		$messages->add($_msg);     
 	}
+
+
+
 
 	$response = $bot->replyMessage($reply_token, $messages);
 
 
-	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} : {$displayName} : {$text}");
+	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} : {$displayName} : {$text_received}");
 	$response = $bot->pushMessage('U3c02f02d470aac70e331fcb0fe1eae3c', $textMessageBuilder);
 
 	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
