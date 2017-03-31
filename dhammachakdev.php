@@ -64,7 +64,7 @@ foreach ($events as $event) {
 
 	// ถ้าสิ่งที่ส่งมาเป็นตัวเลข
 	if(is_int($round_received) && $round_received > 0){
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("อนุโมทนากับการส่งยอดนะคะ คุณ".$displayName);
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขออนุโมทนาบุญกับการส่งยอดนะคะ คุณ".$displayName);
 		$messages->add($_msg);     
 
 		if(!$registed){
