@@ -1,6 +1,5 @@
 <?php
-define("LINE_MESSAGING_API_CHANNEL_SECRET", '	
-cf0ce886078d72cb4dac84067938cd1a');
+define("LINE_MESSAGING_API_CHANNEL_SECRET", 'cf0ce886078d72cb4dac84067938cd1a');
 define("LINE_MESSAGING_API_CHANNEL_TOKEN", 'koGlCXsvgSe+hGyZLr+5ggRf9+hy+YUFjzuZIy19/dk2T7yJLkrSB/I+R4Qjipaym4/QlQI20kGjzag554KDZc596JWaSgp5juQALxAZChLyfFiZcJxZsbU/8iRcytkDq02Q6gkxKLCyPB7g9lnIvAdB04t89/1O/w1cDnyilFU=');
 
 require __DIR__."/vendor/autoload.php";
@@ -26,9 +25,6 @@ foreach ($events as $event) {
 	$getProfileResponse = $bot->getProfile($userId);
 	if ($getProfileResponse->isSucceeded()) {
 	    $profile = $getProfileResponse->getJSONDecodedBody();
-	    //echo $profile['displayName'];
-	    //echo $profile['pictureUrl'];
-	    //echo $profile['statusMessage'];
 	    $displayName =  $profile['displayName'];
 	    $pictureUrl =  $profile['pictureUrl'];
 	    $statusMessage =  $profile['statusMessage'];
@@ -84,39 +80,6 @@ foreach ($events as $event) {
 		]);
 	}
 
-
-
-
-/*        for($i=0;$i<2;$i++)
-	{
-	    $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$userId".$i);
-	    $messages->add($_msg);
-	}
- */
- 
-
-/* 
-	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$pictureUrl");
-	$messages->add($_msg);      
-
-	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ID : $userId");
-	$messages->add($_msg);
-
-
-	$txt = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$text");
-	$messages->add($txt);    
-	$txt = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$type");
-	$messages->add($txt);*/
-	
-/*
-	$imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder("https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg","https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg");            
-	$messages->add($imageMessageBuilder);
-
-
-	$imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($profile['pictureUrl'],$profile['pictureUrl']);            
-	$messages->add($imageMessageBuilder);
-*/
-
 	$response = $bot->replyMessage($reply_token, $messages);
 
 
@@ -127,8 +90,6 @@ foreach ($events as $event) {
 
 
 }
-
-
 
 echo "OK";
 ?>
