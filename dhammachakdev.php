@@ -86,7 +86,7 @@ foreach ($events as $event) {
 		]);
 
 	}elseif($text_received == "ยอดรวม"){
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดรวมทั้งหมดที่ส่งมาแล้ว ของคุณ ".$displayName." คือ $sum_round จบ");
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ยอดรวมทั้งหมดที่ส่งมาแล้วของคุณ ".$displayName." คือ $sum_round จบ");
 		$messages->add($_msg);
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("อนุโมทนาบุญด้วยนะคะ คุณ".$displayName);
 		$messages->add($_msg);     	
