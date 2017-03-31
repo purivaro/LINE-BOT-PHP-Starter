@@ -121,7 +121,7 @@ foreach ($events as $event) {
 
 
 	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} : {$displayName} : {$text}");
-	$response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
+	$response = $bot->pushMessage('U3c02f02d470aac70e331fcb0fe1eae3c', $textMessageBuilder);
 
 	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
