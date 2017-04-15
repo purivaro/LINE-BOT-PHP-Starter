@@ -23,6 +23,7 @@ foreach ($events as $event) {
 	$type = $event->getType();
 	$timestamp = $event->getTimestamp();
 
+	// เก็บ Profile ของ user
 	$getProfileResponse = $bot->getProfile($userId);
 	if ($getProfileResponse->isSucceeded()) {
 	    $profile = $getProfileResponse->getJSONDecodedBody();
@@ -31,11 +32,13 @@ foreach ($events as $event) {
 	    $statusMessage =  $profile['statusMessage'];
 	}
 
-
+	// สร้าง object ข้อความตอบกลับ
 	$messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
+	// ที่อยู่ของ server เรา
 	$url_vstar = "https://www.vstarproject.com/project/linebot/dhammachak/api.php";
 
+	// ส่ง data ไปตามนี้
 	$data_vstar = [
 	'line_id'=> $userId,
 	'text_type'=> $type,
@@ -45,8 +48,9 @@ foreach ($events as $event) {
 	'pictureUrl'=> $pictureUrl,
 	'statusMessage'=> $statusMessage
 	];
-
 	$post_vstar = json_encode($data_vstar);
+
+	// ส่งข้อมูลไปด้วย curl	
 	$headers_vstar = ['Content-Type: application/json'];
 	$ch_vstar = curl_init($url_vstar);
 	curl_setopt($ch_vstar, CURLOPT_CUSTOMREQUEST, "POST");
@@ -57,10 +61,13 @@ foreach ($events as $event) {
 	$result_vstar = curl_exec($ch_vstar);
 	curl_close($ch_vstar);
 
+	// รับข้อความตอบกลับ
 	$res = json_decode($result_vstar,true);
 
+	// ข้อความตอบกลับ
     $message_vstar = $res['message'];
 
+	//ส่งข้อความ
 	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message_vstar );
 	$messages->add($_msg);
 
@@ -148,6 +155,7 @@ foreach ($events as $event) {
 	}
 */
 
+	// เผื่อมี error feedback 
 	$response = $bot->replyMessage($reply_token, $messages);
 
 	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
