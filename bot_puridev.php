@@ -14,29 +14,25 @@ if(!is_null($events['events'])){
             // Get text sent
             $text = $event['message']['text'];
 
-            $url_ibs = "http://www.ibsone.com/project/linebot/puribot/api/translate.php";
-
-            $data_ibs = [
-            'text'=> $text
-            ];
-
-            $post_ibs = json_encode($data_ibs);
-            $headers_ibs = ['Content-Type: application/json'];
-            $ch_ibs = curl_init($url_ibs);
-            curl_setopt($ch_ibs, CURLOPT_CUSTOMREQUEST, "POST");
-            curl_setopt($ch_ibs, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch_ibs, CURLOPT_POSTFIELDS, $post_ibs);
-            curl_setopt($ch_ibs, CURLOPT_HTTPHEADER, $headers_ibs);
-            curl_setopt($ch_ibs, CURLOPT_FOLLOWLOCATION, 1);
-            $result_ibs = curl_exec($ch_ibs);
-            curl_close($ch_ibs);
-
-            $res = json_decode($result_ibs,true);
-
-            $messages = $res['messages'];
-
             // Get reply token
             $replyToken = $event['replyToken'];
+
+            // Build message to reply back
+            $messages = [
+                [
+                    'type' => 'text',
+                    'text' => "ดีคับ"
+                ],
+                [
+                    'type' => 'text',
+                    'text' => "เมื่อกี้คุณพูดว่า..".$text
+                ],
+                [
+                    'type' => 'text',
+                    'text' => "มีอะไรเหรอครับ?"
+                ],
+            ];
+
 
             $url = 'https://api.line.me/v2/bot/message/reply';
             $data = [
