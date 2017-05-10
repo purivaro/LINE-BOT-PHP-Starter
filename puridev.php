@@ -18,7 +18,7 @@ try {
 $firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-fa656ae233.json');
 $database = $firebase->getDatabase();
 
-$error_log = $database->getReference('line/chat_history/error_log');
+$error_log = $database->getReference('line/error_log');
 $error_log->push([
 		'error' => $e
 ]);
