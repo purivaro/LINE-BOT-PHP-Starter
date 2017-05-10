@@ -15,9 +15,13 @@ try {
   var_dump($e); 
 }
 
+//Get content such as image
+//https://api.line.me/v2/bot/message/{messageId}/content
+
 foreach ($events as $event) {
 	$reply_token = $event->getReplyToken();
 	$type = $event->getType();
+	$msgId = $event->getMessageId();
 	if($type == 'message'){
 		$text = $event->getText();		
 	}
@@ -71,10 +75,10 @@ foreach ($events as $event) {
 	}
 
 	// ถ้าลงทะเบียนแล้ว
-	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("คุณ".$displayName." ลงทะเบียนเรียบร้อยแล้ว");
-	$messages->add($_msg);
-	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ข้อความที่คุณส่งมา เป็นประเภท $type จะรวมอยู่ที่นี่ https://puri-contact.firebaseapp.com/line_chat_puridev.html");
-	$messages->add($_msg);
+	//$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("คุณ".$displayName." ลงทะเบียนเรียบร้อยแล้ว");
+	//$messages->add($_msg);
+	//$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ข้อความที่คุณส่งมา เป็นประเภท $type จะรวมอยู่ที่นี่ https://puri-contact.firebaseapp.com/line_chat_puridev.html");
+	//$messages->add($_msg);
 
 	$chat_history = $database->getReference('line/chat_history/puri_dev');
 	if($type=='sticker'){$text="sticker send";}	
@@ -123,7 +127,7 @@ foreach ($events as $event) {
 	$response = $bot->replyMessage($reply_token, $messages);
 
 
-	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} : {$displayName} : {$text} : {$type}");
+	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("User ID : {$userId} \n Display Name : {$displayName} \n Text : {$text}\n Type : {$type} \n MsgId : {$msgId}");
 	$response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
 
 	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
