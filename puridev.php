@@ -56,21 +56,42 @@ if($MessageId) {
 
 foreach ($events as $event) {
 	$reply_token = $event->getReplyToken();
-	$type = $event->getMessageType();
 	$msgId = $event->getMessageId();
-	if($type == 'text'){
-		$text = $event->getText();		
-	}
-
 	$userId = $event->getUserId();
 	$timestamp = $event->getTimestamp();
+
+	$MessageType = $event->getMessageType();	
+	switch($MessageType){
+		case 'text':
+			$text = $event->getText();				
+			break;
+		case 'image':
+			$text = 'Image Sent';				
+			break;
+		case 'video':
+			$text = 'video Sent';				
+			break;
+		case 'audio':
+			$text = 'audio Sent';				
+			break;
+		case 'file':
+			$text = 'file Sent';				
+			break;
+		case 'location':
+			$text = 'location Sent';				
+			break;
+		case 'sticker':
+			$text = 'Sticker Sent';				
+			break;			
+		default:
+			$text = 'Default';			
+	}
+
 
 	$getProfileResponse = $bot->getProfile($userId);
 	if ($getProfileResponse->isSucceeded()) {
 	    $profile = $getProfileResponse->getJSONDecodedBody();
-	    //echo $profile['displayName'];
-	    //echo $profile['pictureUrl'];
-	    //echo $profile['statusMessage'];
+
 	    $displayName =  $profile['displayName'];
 	    $pictureUrl =  $profile['pictureUrl'];
 	    $statusMessage =  $profile['statusMessage'];
@@ -131,10 +152,10 @@ foreach ($events as $event) {
 	//$messages->add($_msg);
 
 	$chat_history = $database->getReference('line/chat_history/puri_dev');
-	if($type=='sticker'){$text="sticker send";}	
+
 	$chat_history->push([
 			'line_id' => $userId,
-			'type' => $type,
+			'MessageType' => $MessageType,
 			'pictureUrl' => $pictureUrl,
 			'displayName' => $displayName,
 			'text' => $text,
@@ -179,8 +200,15 @@ foreach ($events as $event) {
 
 	$response = $bot->replyMessage($reply_token, $messages);
 
+	$response_text = "
+		MsgId : {$msgId} 
+		\n User ID : {$userId} 
+		\n Display Name : {$displayName} 
+		\n MessageType : {$MessageType} 
+		\n Text : {$text}
+	";
 
-	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("User ID : {$userId} \n Display Name : {$displayName} \n Text : {$text}\n Type : {$type} \n MsgId : {$msgId}");
+	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
 	$response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
 
 	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
