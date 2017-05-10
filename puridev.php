@@ -34,27 +34,11 @@ if(isset($event)){
 }
 
 
-if ($event instanceof MessageEvent) {
-	if ($event instanceof TextMessage) {
-		$handler = new TextMessageHandler($bot, $logger, $req, $event);
-	} elseif ($event instanceof StickerMessage) {
-		$handler = new StickerMessageHandler($bot, $logger, $event);
-	} elseif ($event instanceof LocationMessage) {
-		$handler = new LocationMessageHandler($bot, $logger, $event);
-	} elseif ($event instanceof ImageMessage) {
-		$handler = new ImageMessageHandler($bot, $logger, $req, $event);
-	} elseif ($event instanceof AudioMessage) {
-		$handler = new AudioMessageHandler($bot, $logger, $req, $event);
-	} elseif ($event instanceof VideoMessage) {
-		$handler = new VideoMessageHandler($bot, $logger, $req, $event);
-	} else {
-		// Just in case...
-		$logger->info('Unknown message type has come');
-		continue;
-	}
-	
-	$error_log = $database->getReference('line/error_log');
-	$error_log->push([
+if($MessageId) {
+
+
+	$console_log = $database->getReference('line/console_log');
+	$console_log->push([
 			'error' => $e,
 			'test' => '555',
 			'msgid' => $MessageId
