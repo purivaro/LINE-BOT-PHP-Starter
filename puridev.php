@@ -52,11 +52,17 @@ foreach ($events as $event) {
 		\n EventType : {$eventType}
 		";
 
+
+		// ส่งข้อความไปยังกลุ่ม
+		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
+		$response_group = $bot->pushMessage($GroupId, $textMessageBuilder);
+
+/*
+		// ส่งข้อความตอบกลับ
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
 		$reply_messages->add($_msg);
-
-		// ส่งข้อความตอบกลับ
 		$response = $bot->replyMessage($reply_token, $reply_messages);
+		*/
 	}
 
 	// ถ้าเป็นการ leave group
@@ -65,7 +71,7 @@ foreach ($events as $event) {
 		//  ลบ group id นี้ออกจาก firebase
 		$ref_group = $database->getReference('line/contact/group');
 		$data = $ref_group->getValue(); 
-		
+
 		foreach($data as $value){
 			if($GroupId==$value['GroupId']){
 				$group_registed = true;
