@@ -8,6 +8,7 @@ require __DIR__."/vendor/autoload.php";
 $msg_type = $_REQUEST['msg_type'];
 $UserId = $_REQUEST['UserId'];
 $text_send = $_REQUEST['text_send'];
+$thumbnail = $_REQUEST['thumbnail'];
 
 // user id ของ puri = 'U02a2cb394330d90571a21b09f2c230ea'
 
@@ -29,11 +30,11 @@ if($msg_type == 'text'){
     
 }elseif($msg_type == 'image'){
     // รูป
-    $imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($text_send,$text_send);
+    $imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($text_send,$thumbnail);
     $messages->add($imageMessageBuilder);
 }elseif($msg_type == 'video'){
     // Video
-    $VideoMessageBuilder = new \LINE\LINEBot\MessageBuilder\VideoMessageBuilder($originalContentUrl,$previewImageUrl);
+    $VideoMessageBuilder = new \LINE\LINEBot\MessageBuilder\VideoMessageBuilder($originalContentUrl,$thumbnail);
     $messages->add($VideoMessageBuilder);
 }
 
