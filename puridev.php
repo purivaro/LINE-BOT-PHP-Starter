@@ -31,6 +31,7 @@ if ($response->isSucceeded()) {
 $event = $events[0];
 if(isset($event)){
 	$MessageId = $event->getMessageId();
+	$MessageType = $event->getMessageType();
 }
 
 
@@ -39,9 +40,9 @@ if($MessageId) {
 
 	$console_log = $database->getReference('line/console_log');
 	$console_log->push([
-			'error' => $e,
 			'test' => '555',
-			'msgid' => $MessageId
+			'MessageId' => $MessageId,
+			'MessageType' => $MessageType,
 	]);	
 }
 
