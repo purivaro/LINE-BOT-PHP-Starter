@@ -15,9 +15,14 @@ try {
   var_dump($e); 
 }
 
+$firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-fa656ae233.json');
+$database = $firebase->getDatabase();
 
-//Get content such as image
-//https://api.line.me/v2/bot/message/{messageId}/content
+$error_log = $database->getReference('line/chat_history/error_log');
+$error_log->push([
+		'error' => $e
+]);
+
 
 foreach ($events as $event) {
 	$reply_token = $event->getReplyToken();
@@ -43,6 +48,9 @@ foreach ($events as $event) {
 
 
 
+	//Get content such as image
+	//https://api.line.me/v2/bot/message/{messageId}/content
+
 	$response = $bot->getMessageContent($msgId);
 	if ($response->isSucceeded()) {
 		$tempfile = tmpfile();
@@ -56,9 +64,6 @@ foreach ($events as $event) {
 
 	$messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
-
-	$firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-fa656ae233.json');
-	$database = $firebase->getDatabase();
 
 	$reference = $database->getReference('object/Line_contact');
 	$data = $reference->getValue(); 
