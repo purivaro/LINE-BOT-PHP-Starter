@@ -149,14 +149,14 @@ foreach ($events as $event) {
 	$txt = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$type");
 	$messages->add($txt);*/
 	
-/*
+
 	$imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder("https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg","https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg");            
 	$messages->add($imageMessageBuilder);
 
-*/
+/*
 	$imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($profile['pictureUrl'],$profile['pictureUrl']);            
 	$messages->add($imageMessageBuilder);
-
+*/
 
 	$response = $bot->replyMessage($reply_token, $messages);
 
