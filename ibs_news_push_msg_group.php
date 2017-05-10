@@ -42,6 +42,17 @@ foreach($data as $value){
     $response = $bot->pushMessage($GroupId, $messages);    
 }
 
+$current_time = date("Y/m/d h:i:sa");
+
+// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
+$chat_history = $database->getReference('ibs/line/chat_history');
+$chat_history->push([
+    'GroupId' => $GroupId,
+    'MessageType' => $msg_type,
+    'text' => $text_send,
+    'current_time' => $current_time,
+]);
+
 
 // ส่งข้อความมาที่เครื่อง samsung taba ด้วย
 //$response = $bot->pushMessage('Ua2bdf85b0466beeb8c8af8fbccfba5df', $textMessageBuilder);
