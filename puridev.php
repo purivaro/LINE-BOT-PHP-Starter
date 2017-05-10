@@ -65,23 +65,24 @@ foreach ($events as $event) {
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$statusMessage");
 		$messages->add($_msg);     
 
-	}else{
-		// ถ้าลงทะเบียนแล้ว
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("คุณ".$displayName." ลงทะเบียนเรียบร้อยแล้ว");
-		$messages->add($_msg);
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ข้อความที่คุณส่งมา จะรวมอยู่ที่นี่ https://puri-contact.firebaseapp.com/line_chat_puridev.html");
-		$messages->add($_msg);
-
-		$chat_history = $database->getReference('line/chat_history/puri_dev');
-		if($type=='sticker'){$text="sticker send";}	
-		$chat_history->push([
-				'line_id' => $userId,
-				'pictureUrl' => $pictureUrl,
-				'displayName' => $displayName,
-				'text' => $text,
-				'timestamp' => $timestamp
-		]);
 	}
+
+	// ถ้าลงทะเบียนแล้ว
+	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("คุณ".$displayName." ลงทะเบียนเรียบร้อยแล้ว");
+	$messages->add($_msg);
+	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ข้อความที่คุณส่งมา เป็นประเภท $type จะรวมอยู่ที่นี่ https://puri-contact.firebaseapp.com/line_chat_puridev.html");
+	$messages->add($_msg);
+
+	$chat_history = $database->getReference('line/chat_history/puri_dev');
+	if($type=='sticker'){$text="sticker send";}	
+	$chat_history->push([
+			'line_id' => $userId,
+			'pictureUrl' => $pictureUrl,
+			'displayName' => $displayName,
+			'text' => $text,
+			'timestamp' => $timestamp
+	]);
+
 
 
 
