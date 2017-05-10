@@ -200,12 +200,12 @@ foreach ($events as $event) {
 
 	$response = $bot->replyMessage($reply_token, $messages);
 
-	$response_text = "
-		MsgId : {$msgId} 
-		\n User ID : {$userId} 
-		\n Display Name : {$displayName} 
-		\n MessageType : {$MessageType} 
-		\n Text : {$text}
+	$response_text = 
+	" MsgId : {$msgId} 
+	\n User ID : {$userId} 
+	\n Display Name : {$displayName} 
+	\n MessageType : {$MessageType} 
+	\n Text : {$text}
 	";
 
 	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
