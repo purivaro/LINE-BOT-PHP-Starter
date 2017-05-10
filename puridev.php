@@ -27,11 +27,16 @@ if ($response->isSucceeded()) {
     error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 }
 */
+if(isset($events[0])){
+	$MessageId = $events[0]->getMessageId();
+}
+
 
 $error_log = $database->getReference('line/error_log');
 $error_log->push([
 		'error' => $e,
 		'test' => '555',
+		'msgid' => $MessageId
 ]);
 
 
