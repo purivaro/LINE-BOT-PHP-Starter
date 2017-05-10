@@ -52,9 +52,9 @@ if($MessageId) {
 
 foreach ($events as $event) {
 	$reply_token = $event->getReplyToken();
-	$type = $event->getType();
+	$type = $event->getMessageType();
 	$msgId = $event->getMessageId();
-	if($type == 'message'){
+	if($type == 'text'){
 		$text = $event->getText();		
 	}
 
