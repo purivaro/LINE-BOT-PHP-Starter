@@ -15,46 +15,14 @@ try {
   var_dump($e); 
 }
 
+// connect กับ firebase
 $firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-fa656ae233.json');
 $database = $firebase->getDatabase();
-
-/*
-$response = $bot->getMessageContent('<messageId>');
-if ($response->isSucceeded()) {
-    $tempfile = tmpfile();
-    fwrite($tempfile, $response->getRawBody());
-} else {
-    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
-}
-*/
-
-$event = $events[0];
-if(isset($event)){
-	$MessageId = $event->getMessageId();
-	$MessageType = $event->getMessageType();
-}
-
-if($MessageType=='sticker'){
-	$StickerId = $event->getStickerId();
-}
-
-
-if($MessageId) {
-
-	$console_log = $database->getReference('line/console_log');
-	$console_log->push([
-			'test' => '555',
-			'MessageId' => $MessageId,
-			'MessageType' => $MessageType,
-			'StickerId' => $StickerId,
-	]);	
-}
-
-
 
 
 
 foreach ($events as $event) {
+	$eventType = $event->getType();
 	$reply_token = $event->getReplyToken();
 	$msgId = $event->getMessageId();
 	$userId = $event->getUserId();
@@ -62,29 +30,49 @@ foreach ($events as $event) {
 
 	$MessageType = $event->getMessageType();	
 	switch($MessageType){
-		case 'text':
+		case "text":
 			$text = $event->getText();				
 			break;
-		case 'image':
-			$text = 'Image Sent';				
+		case "image":
+			/*
+			$response = $bot->getMessageContent('<messageId>');
+			if ($response->isSucceeded()) {
+				$tempfile = tmpfile();
+				fwrite($tempfile, $response->getRawBody());
+			} else {
+				error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
+			}
+			*/
+			$text = "Image Sent";				
 			break;
-		case 'video':
-			$text = 'video Sent';				
+		case "video":
+			$text = "video Sent";				
 			break;
-		case 'audio':
-			$text = 'audio Sent';				
+		case "audio":
+			$text = "audio Sent";				
 			break;
-		case 'file':
-			$text = 'file Sent';				
+		case "file":
+			$text = "file Sent";				
 			break;
-		case 'location':
-			$text = 'location Sent';				
+		case "location":
+			$getTitle = $event->getTitle();
+			$getAddress = $event->getAddress();
+			$getLatitude = $event->getLatitude();
+			$getLongitude = $event->getLongitude();
+			$text = 
+				" location Sent
+				\n getTitle : $getTitle
+				\n getAddress : $getAddress
+				\n getLatitude : $getLatitude
+				\n getLongitude : $getLongitude				
+			";				
 			break;
-		case 'sticker':
-			$text = 'Sticker Sent';				
+		case "sticker":
+			$StickerId = $event->getStickerId();		
+			$text = "Sticker Sent - ID : $StickerId ";				
 			break;			
 		default:
-			$text = 'Default';			
+			$text = "Default";			
 	}
 
 
@@ -112,47 +100,8 @@ foreach ($events as $event) {
 	}
 
 
-
-
-	$messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
-
-
-	$reference = $database->getReference('object/Line_contact');
-	$data = $reference->getValue(); 
-
-
-	foreach($data as $value){
-		if($userId==$value['line_id']){$registed = true;}
-	}
-
-
-	
-	if(!$registed){
-		// ถ้ายังไม่ลงทะเบียน ก็ลงทะเบียนให้ โดยส่งค่าไปบันทึกใน firebase
-		$reference->push([
-				'line_id' => $userId,
-				'nickname' => $text,
-				'pictureUrl' => $pictureUrl,
-				'displayName' => $displayName
-		]);
-
-		// จากนั้นส่งข้อความตอบกลับไป
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ขอบคุณที่ลงทะเบียน คุณ".$displayName);
-		$messages->add($_msg);     
-
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$statusMessage");
-		$messages->add($_msg);     
-
-	}
-
-	// ถ้าลงทะเบียนแล้ว
-	//$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("คุณ".$displayName." ลงทะเบียนเรียบร้อยแล้ว");
-	//$messages->add($_msg);
-	//$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ข้อความที่คุณส่งมา เป็นประเภท $type จะรวมอยู่ที่นี่ https://puri-contact.firebaseapp.com/line_chat_puridev.html");
-	//$messages->add($_msg);
-
+	// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
 	$chat_history = $database->getReference('line/chat_history/puri_dev');
-
 	$chat_history->push([
 			'line_id' => $userId,
 			'MessageType' => $MessageType,
@@ -164,11 +113,82 @@ foreach ($events as $event) {
 			'write_file' => $write_file,
 	]);
 
+	// สร้าง Object ข้อความตอบกลับ
+	$reply_messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
+
+
+	// check ดูว่ามีรายชื่อ line id นี้ ใน firebase หรือยัง
+	$reference = $database->getReference('object/Line_contact');
+	$data = $reference->getValue(); 
+	foreach($data as $value){
+		if($userId==$value['line_id']){$registed = true;}
+	}
+	
+	// ถ้ายังไม่ลงทะเบียน ก็ลงทะเบียนให้ โดยส่งค่าไปบันทึกใน firebase	
+	if(!$registed){
+		$reference->push([
+				'line_id' => $userId,
+				'nickname' => $text,
+				'pictureUrl' => $pictureUrl,
+				'displayName' => $displayName
+		]);
+	}
+
+	// ข้อความตอบกลับ 1
+	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("สวัสดีคุณ".$displayName);
+	$reply_messages->add($_msg);
+
+	// ข้อความตอบกลับ 2
+	$response_text = 
+	" MsgId : {$msgId} 
+	\n User ID : {$userId} 
+	\n Display Name : {$displayName} 
+	\n MessageType : {$MessageType} 
+	\n Text : {$text}
+	\n EventType : {$eventType}
+	";
+
+	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
+	$reply_messages->add($_msg);
+
+
+	// ส่งข้อความตอบกลับ
+	$response = $bot->replyMessage($reply_token, $reply_messages);
+
+
+	// ข้อความเลือกผู้ส่ง
+
+	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
+
+	$response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
+
+	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+
+
+}
+
+echo "OK";
 
 
 
 
-/*        for($i=0;$i<2;$i++)
+
+
+
+
+
+
+
+	
+/* 
+	// ถ้าลงทะเบียนแล้ว
+	//$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("คุณ".$displayName." ลงทะเบียนเรียบร้อยแล้ว");
+	//$messages->add($_msg);
+	//$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ข้อความที่คุณส่งมา เป็นประเภท $type จะรวมอยู่ที่นี่ https://puri-contact.firebaseapp.com/line_chat_puridev.html");
+	//$messages->add($_msg);
+
+
+       for($i=0;$i<2;$i++)
 	{
 	    $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$userId".$i);
 	    $messages->add($_msg);
@@ -193,30 +213,5 @@ foreach ($events as $event) {
 	$imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder("https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg","https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg");            
 	$messages->add($imageMessageBuilder);
 
-
-	$imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($profile['pictureUrl'],$profile['pictureUrl']);            
-	$messages->add($imageMessageBuilder);
 */
-
-	$response = $bot->replyMessage($reply_token, $messages);
-
-	$response_text = 
-	" MsgId : {$msgId} 
-	\n User ID : {$userId} 
-	\n Display Name : {$displayName} 
-	\n MessageType : {$MessageType} 
-	\n Text : {$text}
-	";
-
-	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
-	$response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
-
-	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
-
-
-}
-
-
-
-echo "OK";
 ?>
