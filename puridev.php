@@ -15,6 +15,7 @@ try {
   var_dump($e); 
 }
 
+
 //Get content such as image
 //https://api.line.me/v2/bot/message/{messageId}/content
 
@@ -39,6 +40,19 @@ foreach ($events as $event) {
 	    $pictureUrl =  $profile['pictureUrl'];
 	    $statusMessage =  $profile['statusMessage'];
 	}
+
+
+
+	$response = $bot->getMessageContent($msgId);
+	if ($response->isSucceeded()) {
+		$tempfile = tmpfile();
+		fwrite($tempfile, $response->getRawBody());
+	} else {
+		error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
+	}
+
+
+
 
 	$messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
