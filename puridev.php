@@ -116,6 +116,7 @@ foreach ($events as $event) {
 	if($type=='sticker'){$text="sticker send";}	
 	$chat_history->push([
 			'line_id' => $userId,
+			'type' => $type,
 			'pictureUrl' => $pictureUrl,
 			'displayName' => $displayName,
 			'text' => $text,
