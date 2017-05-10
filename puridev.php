@@ -18,6 +18,16 @@ try {
 $firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-fa656ae233.json');
 $database = $firebase->getDatabase();
 
+/*
+$response = $bot->getMessageContent('<messageId>');
+if ($response->isSucceeded()) {
+    $tempfile = tmpfile();
+    fwrite($tempfile, $response->getRawBody());
+} else {
+    error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
+}
+*/
+
 $error_log = $database->getReference('line/error_log');
 $error_log->push([
 		'error' => $e,
@@ -57,6 +67,7 @@ foreach ($events as $event) {
 	if ($response->isSucceeded()) {
 		$tempfile = tmpfile();
 		fwrite($tempfile, $response->getRawBody());
+		$write_file = 'Yes';
 	} else {
 		error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 	}
@@ -110,6 +121,7 @@ foreach ($events as $event) {
 			'text' => $text,
 			'timestamp' => $timestamp,
 			'msgId' => $msgId,
+			'write_file' => $write_file,
 	]);
 
 
@@ -141,10 +153,10 @@ foreach ($events as $event) {
 	$imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder("https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg","https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg");            
 	$messages->add($imageMessageBuilder);
 
-
+*/
 	$imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($profile['pictureUrl'],$profile['pictureUrl']);            
 	$messages->add($imageMessageBuilder);
-*/
+
 
 	$response = $bot->replyMessage($reply_token, $messages);
 
