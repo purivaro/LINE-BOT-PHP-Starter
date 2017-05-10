@@ -24,72 +24,77 @@ $database = $firebase->getDatabase();
 foreach ($events as $event) {
 	$eventType = $event->getType();
 	$reply_token = $event->getReplyToken();
-	$msgId = $event->getMessageId();
-	$userId = $event->getUserId();
-	$timestamp = $event->getTimestamp();
+	$timestamp = $event->getTimestamp();	
 
-	$MessageType = $event->getMessageType();	
-	switch($MessageType){
-		case "text":
-			$text = $event->getText();				
-			break;
-		case "image":
-			/*
-			$response = $bot->getMessageContent('<messageId>');
-			if ($response->isSucceeded()) {
-				$tempfile = tmpfile();
-				fwrite($tempfile, $response->getRawBody());
-			} else {
-				error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
-			}
-			*/
-			$text = "Image Sent";				
-			break;
-		case "video":
-			$text = "video Sent";				
-			break;
-		case "audio":
-			$text = "audio Sent";				
-			break;
-		case "file":
-			$text = "file Sent";				
-			break;
-		case "location":
-			$getTitle = $event->getTitle();
-			$getAddress = $event->getAddress();
-			$getLatitude = $event->getLatitude();
-			$getLongitude = $event->getLongitude();
-			$text = 
-				" location Sent
-				\n getTitle : $getTitle
-				\n getAddress : $getAddress
-				\n getLatitude : $getLatitude
-				\n getLongitude : $getLongitude				
-			";				
-			break;
-		case "sticker":
-			$StickerId = $event->getStickerId();		
-			$text = "Sticker Sent - ID : $StickerId ";				
-			break;			
-		default:
-			$text = "Default";			
+	if($eventType == 'message'){
+		$msgId = $event->getMessageId();
+		$userId = $event->getUserId();
+		$MessageType = $event->getMessageType();		
+		switch($MessageType){
+			case "text":
+				$text = $event->getText();				
+				break;
+			case "image":
+				/*
+				$response = $bot->getMessageContent('<messageId>');
+				if ($response->isSucceeded()) {
+					$tempfile = tmpfile();
+					fwrite($tempfile, $response->getRawBody());
+				} else {
+					error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
+				}
+				*/
+				$text = "Image Sent";				
+				break;
+			case "video":
+				$text = "video Sent";				
+				break;
+			case "audio":
+				$text = "audio Sent";				
+				break;
+			case "file":
+				$text = "file Sent";				
+				break;
+			case "location":
+				$getTitle = $event->getTitle();
+				$getAddress = $event->getAddress();
+				$getLatitude = $event->getLatitude();
+				$getLongitude = $event->getLongitude();
+				$text = 
+					" location Sent
+					\n getTitle : $getTitle
+					\n getAddress : $getAddress
+					\n getLatitude : $getLatitude
+					\n getLongitude : $getLongitude				
+				";				
+				break;
+			case "sticker":
+				$StickerId = $event->getStickerId();		
+				$text = "Sticker Sent - ID : $StickerId ";				
+				break;			
+			default:
+				$text = "Default";			
+		}
+
+
+		$getProfileResponse = $bot->getProfile($userId);
+		if ($getProfileResponse->isSucceeded()) {
+			$profile = $getProfileResponse->getJSONDecodedBody();
+
+			$displayName =  $profile['displayName'];
+			$pictureUrl =  $profile['pictureUrl'];
+			$statusMessage =  $profile['statusMessage'];
+		}		
+	}else{
+
 	}
 
-
-	$getProfileResponse = $bot->getProfile($userId);
-	if ($getProfileResponse->isSucceeded()) {
-	    $profile = $getProfileResponse->getJSONDecodedBody();
-
-	    $displayName =  $profile['displayName'];
-	    $pictureUrl =  $profile['pictureUrl'];
-	    $statusMessage =  $profile['statusMessage'];
-	}
 
 
 
 	//Get content such as image
 	//https://api.line.me/v2/bot/message/{messageId}/content
-
+/*
 	$response = $bot->getMessageContent($msgId);
 	if ($response->isSucceeded()) {
 		$tempfile = tmpfile();
@@ -98,7 +103,7 @@ foreach ($events as $event) {
 	} else {
 		error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 	}
-
+*/
 
 	// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
 	$chat_history = $database->getReference('line/chat_history/puri_dev');
@@ -152,9 +157,11 @@ foreach ($events as $event) {
 	$reply_messages->add($_msg);
 
 
-	// ส่งข้อความตอบกลับ
-	$response = $bot->replyMessage($reply_token, $reply_messages);
-
+	// ถ้าเป็น event message ถึงจะตอบกลับ
+	if($eventType == 'message'){
+		// ส่งข้อความตอบกลับ
+		$response = $bot->replyMessage($reply_token, $reply_messages);
+	}
 
 	// ข้อความเลือกผู้ส่ง
 
