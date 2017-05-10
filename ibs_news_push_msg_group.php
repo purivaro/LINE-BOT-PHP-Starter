@@ -4,8 +4,10 @@ define("LINE_MESSAGING_API_CHANNEL_SECRET", '3e4001657a33f71bb310ffba52370d8e');
 define("LINE_MESSAGING_API_CHANNEL_TOKEN", '2Kv6ENeGC9MlIuiCLnePFEfbvkntSmNgCXhhel73PHUZVRoJIkcorESN4CcusUDzS+whtgnSRimkzU/fkFQb7b8v+4t0FLrHqUDHhRjJohCqcIm7sJYxrC9vxpUxBzXfpXeo+y7BhalZIS/OFhx14wdB04t89/1O/w1cDnyilFU=');
 
 require __DIR__."/vendor/autoload.php";
-$text_send = $_REQUEST['text_send'];
+
 $msg_type = $_REQUEST['msg_type'];
+$text_send = $_REQUEST['text_send'];
+
 // user id ของ puri = 'U02a2cb394330d90571a21b09f2c230ea'
 
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
@@ -28,6 +30,10 @@ if($msg_type == 'text'){
     // รูป
     $imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($text_send,$text_send);
     $messages->add($imageMessageBuilder);
+}elseif($msg_type == 'video'){
+    // Video
+    $VideoMessageBuilder = new \LINE\LINEBot\MessageBuilder\VideoMessageBuilder($originalContentUrl,$previewImageUrl);
+    $messages->add($VideoMessageBuilder);
 }
 
 
@@ -42,7 +48,7 @@ foreach($data as $value){
     $response = $bot->pushMessage($GroupId, $messages);    
 }
 
-$current_time = date("Y/m/d h:i:sa");
+$current_time = date("Y/m/d H:i:s");
 
 // เก็บข้อมูลที่เต้าส่งมา Push to Firebase
 $chat_history = $database->getReference('ibs/line/chat_history');
