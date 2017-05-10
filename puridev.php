@@ -76,7 +76,8 @@ foreach ($events as $event) {
 				'line_id' => $userId,
 				'nickname' => $text,
 				'pictureUrl' => $pictureUrl,
-				'displayName' => $displayName
+				'displayName' => $displayName,
+				'msgId' => $msgId,
 		]);
 
 		// จากนั้นส่งข้อความตอบกลับไป
