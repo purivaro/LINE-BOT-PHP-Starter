@@ -15,13 +15,25 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHA
 $firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-fa656ae233.json');
 $database = $firebase->getDatabase();
 
+// สร้าง Object ข้อความตอบกลับ
+$messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
+
+// รูป
+$imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder("https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg","https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg");
+$messages->add($imageMessageBuilder);
+
+// ข้อความ
+$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_send);
+$messages->add($_msg);
+
+
+
 //  check ว่ามี group นี้ใน firebase หรือยัง ถ้ายัง ก็เพิ่มเลย
 $ref_group = $database->getReference('line/contact/group');
 $data = $ref_group->getValue(); 
 foreach($data as $value){
     $GroupId = $value['GroupId'];
-    $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_send);
-    $response = $bot->pushMessage($GroupId, $textMessageBuilder);    
+    $response = $bot->pushMessage($GroupId, $messages);    
 }
 
 
