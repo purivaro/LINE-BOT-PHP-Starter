@@ -21,7 +21,8 @@ $database = $firebase->getDatabase();
 $error_log = $database->getReference('line/error_log');
 $error_log->push([
 		'error' => $e,
-		'test' => '555'
+		'test' => '555',
+		'event' => $events
 ]);
 
 
