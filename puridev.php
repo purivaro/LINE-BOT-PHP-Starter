@@ -34,15 +34,19 @@ if(isset($event)){
 	$MessageType = $event->getMessageType();
 }
 
+if($MessageType=='sticker'){
+	$StickerId = $event->getStickerId();
+}
+
 
 if($MessageId) {
-
 
 	$console_log = $database->getReference('line/console_log');
 	$console_log->push([
 			'test' => '555',
 			'MessageId' => $MessageId,
 			'MessageType' => $MessageType,
+			'StickerId' => $StickerId,
 	]);	
 }
 
