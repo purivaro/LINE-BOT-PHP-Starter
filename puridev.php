@@ -23,12 +23,70 @@ $database = $firebase->getDatabase();
 
 foreach ($events as $event) {
 	$eventType = $event->getType();
-	$reply_token = $event->getReplyToken();
 	$timestamp = $event->getTimestamp();	
 
+	// ถ้าเป็นการ join group
+	if($eventType == 'join'){
+		$reply_token = $event->getReplyToken();			
+		$GroupId = $event->getGroupId();
+
+		//  check ว่ามี group นี้ใน firebase หรือยัง ถ้ายัง ก็เพิ่มเลย
+		$ref_group = $database->getReference('line/contact/group');
+		$data = $ref_group->getValue(); 
+		foreach($data as $value){
+			if($GroupId==$value['GroupId']){$group_registed = true;}
+		}
+		
+		// ถ้ายังไม่ลงทะเบียน ก็ลงทะเบียนให้ โดยส่งค่าไปบันทึกใน firebase	
+		if(!$group_registed){
+			$ref_group->push([
+					'GroupId' => $GroupId,
+					'timestamp' => $timestamp,
+			]);
+		}
+
+		// ข้อความตอบกลับ
+		$response_text = 
+		" Thanks 
+		\n GroupId : {$GroupId} 
+		\n EventType : {$eventType}
+		";
+
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
+		$reply_messages->add($_msg);
+
+		// ส่งข้อความตอบกลับ
+		$response = $bot->replyMessage($reply_token, $reply_messages);
+	}
+
+	// ถ้าเป็นการ leave group
+	if($eventType == 'leave'){
+		$GroupId = $event->getGroupId();
+		//  ลบ group id นี้ออกจาก firebase
+		$ref_group = $database->getReference('line/contact/group');
+		$data = $ref_group->getValue(); 
+		
+		foreach($data as $value){
+			if($GroupId==$value['GroupId']){
+				$group_registed = true;
+			}
+		}
+		
+
+		// ข้อความตอบกลับ 2
+		$response_text = 
+		" Sorry  
+		\n GroupId : {$GroupId} 
+		\n EventType : {$eventType}
+		";
+
+	}
+
+	// ถ้าเป็นการส่งข้อความ
 	if($eventType == 'message'){
+		$reply_token = $event->getReplyToken();			
 		$msgId = $event->getMessageId();
-		$userId = $event->getUserId();
+		$UserId = $event->getUserId();
 		$MessageType = $event->getMessageType();		
 		switch($MessageType){
 			case "text":
@@ -76,8 +134,8 @@ foreach ($events as $event) {
 				$text = "Default";			
 		}
 
-
-		$getProfileResponse = $bot->getProfile($userId);
+		// เก็บข้อมูล profile
+		$getProfileResponse = $bot->getProfile($UserId);
 		if ($getProfileResponse->isSucceeded()) {
 			$profile = $getProfileResponse->getJSONDecodedBody();
 
@@ -85,7 +143,60 @@ foreach ($events as $event) {
 			$pictureUrl =  $profile['pictureUrl'];
 			$statusMessage =  $profile['statusMessage'];
 		}		
-	}else{
+
+		// check ดูว่ามีรายชื่อ line id นี้ ใน firebase หรือยัง
+		$ref_user = $database->getReference('line/contact/user');
+		$data = $ref_user->getValue(); 
+		foreach($data as $value){
+			if($UserId==$value['UserId']){$registed = true;}
+		}
+		
+		// ถ้ายังไม่ลงทะเบียน ก็ลงทะเบียนให้ โดยส่งค่าไปบันทึกใน firebase	
+		if(!$registed){
+			$ref_user->push([
+					'UserId' => $UserId,
+					'PhotoUrl' => $pictureUrl,
+					'DisplayName' => $displayName
+			]);
+		}
+
+		// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
+		$chat_history = $database->getReference('line/chat_history');
+		$chat_history->push([
+				'line_id' => $UserId,
+				'MessageType' => $MessageType,
+				'pictureUrl' => $pictureUrl,
+				'displayName' => $displayName,
+				'text' => $text,
+				'timestamp' => $timestamp,
+				'msgId' => $msgId,
+		]);
+
+		// สร้าง Object ข้อความตอบกลับ
+		$reply_messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
+
+
+		// ข้อความตอบกลับ 1
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("สวัสดีคุณ".$displayName);
+		$reply_messages->add($_msg);
+
+		// ข้อความตอบกลับ 2
+		$response_text = 
+		" MsgId : {$msgId} 
+		\n User ID : {$UserId} 
+		\n Display Name : {$displayName} 
+		\n MessageType : {$MessageType} 
+		\n Text : {$text}
+		\n EventType : {$eventType}
+		";
+
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
+		$reply_messages->add($_msg);
+
+
+		// ส่งข้อความตอบกลับ
+		$response = $bot->replyMessage($reply_token, $reply_messages);
+
 
 	}
 
@@ -105,63 +216,6 @@ foreach ($events as $event) {
 	}
 */
 
-	// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
-	$chat_history = $database->getReference('line/chat_history/puri_dev');
-	$chat_history->push([
-			'line_id' => $userId,
-			'MessageType' => $MessageType,
-			'pictureUrl' => $pictureUrl,
-			'displayName' => $displayName,
-			'text' => $text,
-			'timestamp' => $timestamp,
-			'msgId' => $msgId,
-			'write_file' => $write_file,
-	]);
-
-	// สร้าง Object ข้อความตอบกลับ
-	$reply_messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
-
-
-	// check ดูว่ามีรายชื่อ line id นี้ ใน firebase หรือยัง
-	$reference = $database->getReference('object/Line_contact');
-	$data = $reference->getValue(); 
-	foreach($data as $value){
-		if($userId==$value['line_id']){$registed = true;}
-	}
-	
-	// ถ้ายังไม่ลงทะเบียน ก็ลงทะเบียนให้ โดยส่งค่าไปบันทึกใน firebase	
-	if(!$registed){
-		$reference->push([
-				'line_id' => $userId,
-				'nickname' => $text,
-				'pictureUrl' => $pictureUrl,
-				'displayName' => $displayName
-		]);
-	}
-
-	// ข้อความตอบกลับ 1
-	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("สวัสดีคุณ".$displayName);
-	$reply_messages->add($_msg);
-
-	// ข้อความตอบกลับ 2
-	$response_text = 
-	" MsgId : {$msgId} 
-	\n User ID : {$userId} 
-	\n Display Name : {$displayName} 
-	\n MessageType : {$MessageType} 
-	\n Text : {$text}
-	\n EventType : {$eventType}
-	";
-
-	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
-	$reply_messages->add($_msg);
-
-
-	// ถ้าเป็น event message ถึงจะตอบกลับ
-	if($eventType == 'message'){
-		// ส่งข้อความตอบกลับ
-		$response = $bot->replyMessage($reply_token, $reply_messages);
-	}
 
 	// ข้อความเลือกผู้ส่ง
 
@@ -197,7 +251,7 @@ echo "OK";
 
        for($i=0;$i<2;$i++)
 	{
-	    $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$userId".$i);
+	    $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$UserId".$i);
 	    $messages->add($_msg);
 	}
  */
@@ -207,7 +261,7 @@ echo "OK";
 	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("$pictureUrl");
 	$messages->add($_msg);      
 
-	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ID : $userId");
+	$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("ID : $UserId");
 	$messages->add($_msg);
 
 
