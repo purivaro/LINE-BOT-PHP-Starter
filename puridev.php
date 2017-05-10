@@ -32,7 +32,6 @@ $error_log = $database->getReference('line/error_log');
 $error_log->push([
 		'error' => $e,
 		'test' => '555',
-		'event' => $events[0]->getText()
 ]);
 
 
