@@ -57,7 +57,7 @@ foreach ($events as $event) {
 		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
 		$response_group = $bot->pushMessage($GroupId, $textMessageBuilder);
 
-/*
+		/*
 		// ส่งข้อความตอบกลับ
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
 		$reply_messages->add($_msg);
@@ -72,9 +72,9 @@ foreach ($events as $event) {
 		$ref_group = $database->getReference('line/contact/group');
 		$data = $ref_group->getValue(); 
 
-		foreach($data as $value){
+		foreach($data as $key => $value){
 			if($GroupId==$value['GroupId']){
-				$group_registed = true;
+				$database->getReference('line/contact/group/'.$key)->remove();
 			}
 		}
 		
@@ -211,16 +211,16 @@ foreach ($events as $event) {
 
 	//Get content such as image
 	//https://api.line.me/v2/bot/message/{messageId}/content
-/*
-	$response = $bot->getMessageContent($msgId);
-	if ($response->isSucceeded()) {
-		$tempfile = tmpfile();
-		fwrite($tempfile, $response->getRawBody());
-		$write_file = 'Yes';
-	} else {
-		error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
-	}
-*/
+	/*
+		$response = $bot->getMessageContent($msgId);
+		if ($response->isSucceeded()) {
+			$tempfile = tmpfile();
+			fwrite($tempfile, $response->getRawBody());
+			$write_file = 'Yes';
+		} else {
+			error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
+		}
+	*/
 
 
 	// ข้อความเลือกผู้ส่ง
