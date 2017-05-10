@@ -27,17 +27,42 @@ if ($response->isSucceeded()) {
     error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 }
 */
-if(isset($events[0])){
-	$MessageId = $events[0]->getMessageId();
+
+$event = $events[0];
+if(isset($event)){
+	$MessageId = $event->getMessageId();
 }
 
 
-$error_log = $database->getReference('line/error_log');
-$error_log->push([
-		'error' => $e,
-		'test' => '555',
-		'msgid' => $MessageId
-]);
+if ($event instanceof MessageEvent) {
+	if ($event instanceof TextMessage) {
+		$handler = new TextMessageHandler($bot, $logger, $req, $event);
+	} elseif ($event instanceof StickerMessage) {
+		$handler = new StickerMessageHandler($bot, $logger, $event);
+	} elseif ($event instanceof LocationMessage) {
+		$handler = new LocationMessageHandler($bot, $logger, $event);
+	} elseif ($event instanceof ImageMessage) {
+		$handler = new ImageMessageHandler($bot, $logger, $req, $event);
+	} elseif ($event instanceof AudioMessage) {
+		$handler = new AudioMessageHandler($bot, $logger, $req, $event);
+	} elseif ($event instanceof VideoMessage) {
+		$handler = new VideoMessageHandler($bot, $logger, $req, $event);
+	} else {
+		// Just in case...
+		$logger->info('Unknown message type has come');
+		continue;
+	}
+	
+	$error_log = $database->getReference('line/error_log');
+	$error_log->push([
+			'error' => $e,
+			'test' => '555',
+			'msgid' => $MessageId
+	]);	
+}
+
+
+
 
 
 foreach ($events as $event) {
