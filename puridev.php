@@ -17,9 +17,12 @@ try {
 
 foreach ($events as $event) {
 	$reply_token = $event->getReplyToken();
-	$text = $event->getText();
-	$userId = $event->getUserId();
 	$type = $event->getType();
+	if($type == 'message'){
+		$text = $event->getText();		
+	}
+
+	$userId = $event->getUserId();
 	$timestamp = $event->getTimestamp();
 
 	$getProfileResponse = $bot->getProfile($userId);
@@ -120,7 +123,7 @@ foreach ($events as $event) {
 	$response = $bot->replyMessage($reply_token, $messages);
 
 
-	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} : {$displayName} : {$text}");
+	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("{$userId} : {$displayName} : {$text} : {$type}");
 	$response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
 
 	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
