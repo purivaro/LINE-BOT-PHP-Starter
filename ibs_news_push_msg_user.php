@@ -34,10 +34,9 @@ if($msg_type == 'text'){
     $messages->add($imageMessageBuilder);
 }elseif($msg_type == 'video'){
     // Video
-    $VideoMessageBuilder = new \LINE\LINEBot\MessageBuilder\VideoMessageBuilder($originalContentUrl,$thumbnail);
+    $VideoMessageBuilder = new \LINE\LINEBot\MessageBuilder\VideoMessageBuilder($text_send,$thumbnail);
     $messages->add($VideoMessageBuilder);
 }
-
 
 
 $response = $bot->pushMessage($UserId, $messages);    
