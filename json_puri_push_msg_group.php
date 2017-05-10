@@ -5,6 +5,7 @@ define("LINE_MESSAGING_API_CHANNEL_TOKEN", '6tS7pO00ncfJFML6WrMEMXhtYru4rMFRapvH
 
 require __DIR__."/vendor/autoload.php";
 $text_send = $_REQUEST['text_send'];
+$msg_type = $_REQUEST['msg_type'];
 // user id ของ puri = 'U02a2cb394330d90571a21b09f2c230ea'
 
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
@@ -18,13 +19,18 @@ $database = $firebase->getDatabase();
 // สร้าง Object ข้อความตอบกลับ
 $messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
-// รูป
-$imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder("https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg","https://s-media-cache-ak0.pinimg.com/originals/3d/19/e2/3d19e22f8fc92cdbd53337558220e262.jpg");
-$messages->add($imageMessageBuilder);
+if($msg_type == 'text'){
+    // ข้อความ
+    $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_send);
+    $messages->add($_msg);
+    
+}elseif($msg_type == 'image'){
+    // รูป
+    $imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($text_send,$text_send);
+    $messages->add($imageMessageBuilder);
+}
 
-// ข้อความ
-$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_send);
-$messages->add($_msg);
+
 
 
 
