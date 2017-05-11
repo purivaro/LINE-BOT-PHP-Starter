@@ -83,7 +83,7 @@ foreach ($events as $event) {
 
 		// ข้อความตอบกลับ 2
 		$response_text = 
-		" ถูกลบจากกลุ่มแล้ว น้องฟเสียจุย  
+		" ถูกลบจากกลุ่มแล้ว น้องเสียจุย TT
 		\n GroupId : {$GroupId} 
 		\n EventType : {$eventType}
 		";
