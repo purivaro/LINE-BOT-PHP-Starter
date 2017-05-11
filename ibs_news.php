@@ -225,7 +225,7 @@ foreach ($events as $event) {
 	*/
 
 
-	// ข้อความเลือกผู้ส่ง
+	// ข้อความส่งถึง Puri
 
 	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
 
