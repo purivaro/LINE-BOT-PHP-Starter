@@ -52,6 +52,7 @@ $chat_history->push([
     'UserId' => $UserId,
     'MessageType' => $msg_type,
     'text' => $text_send,
+    'thumbnail' => $thumbnail,
     'current_time' => $current_time,
 ]);
 
