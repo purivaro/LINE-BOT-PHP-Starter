@@ -83,7 +83,7 @@ foreach ($events as $event) {
 
 		// ข้อความตอบกลับ 2
 		$response_text = 
-		" ถูกลบจากกลุ่มแล้ว น้องเสียจุย  
+		" ถูกลบจากกลุ่มแล้ว น้องฟเสียจุย  
 		\n GroupId : {$GroupId} 
 		\n EventType : {$eventType}
 		";
@@ -229,7 +229,7 @@ foreach ($events as $event) {
 
 	$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
 
-	$response = $bot->pushMessage('U02a2cb394330d90571a21b09f2c230ea', $textMessageBuilder);
+	$response = $bot->pushMessage('U66c236822e18940229be8b7e93464a99', $textMessageBuilder);
 
 	echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
