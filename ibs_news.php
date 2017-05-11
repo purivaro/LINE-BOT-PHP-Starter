@@ -47,9 +47,11 @@ foreach ($events as $event) {
 
 		// ข้อความตอบกลับ
 		$response_text = 
-		" Thanks 
+		" ขอบคุณที่ีเชิญฉันเข้าร่วมกลุ่ม
+		\n ฉันคือ Bot แจ้งข่าวชมรมพุทธ 
+		\n ฉัันมีข่าวดีมาฝากท่าน 
+		\n คอยติดตามกันนะคะ
 		\n GroupId : {$GroupId} 
-		\n EventType : {$eventType}
 		";
 
 
@@ -81,7 +83,7 @@ foreach ($events as $event) {
 
 		// ข้อความตอบกลับ 2
 		$response_text = 
-		" Sorry  
+		" ถูกลบจากกลุ่มแล้ว น้องเสียจุย  
 		\n GroupId : {$GroupId} 
 		\n EventType : {$eventType}
 		";
