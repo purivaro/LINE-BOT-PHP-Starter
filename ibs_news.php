@@ -182,6 +182,26 @@ foreach ($events as $event) {
 				'msgId' => $msgId,
 		]);
 
+
+		// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
+		$chat_history_user = $database->getReference('ibs/line/contact/user')->orderByChild('UserId')
+			// returns all persons being exactly 1.98 (meters) tall
+			->equalTo($UserId)
+			->getSnapshot();
+		$chat_history_user->push([
+				'line_id' => $UserId,
+				'MessageType' => $MessageType,
+				'pictureUrl' => $pictureUrl,
+				'displayName' => $displayName,
+				'text' => $text,
+				'timestamp' => $timestamp,
+				'msgId' => $msgId,
+		]);
+
+
+
+
+
 		// สร้าง Object ข้อความตอบกลับ
 		$reply_messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
