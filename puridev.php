@@ -99,15 +99,15 @@ foreach ($events as $event) {
 				$text = $event->getText();				
 				break;
 			case "image":
-				/*
-				$response = $bot->getMessageContent('<messageId>');
+				
+				$response = $bot->getMessageContent($msgId);
 				if ($response->isSucceeded()) {
 					$tempfile = tmpfile();
 					fwrite($tempfile, $response->getRawBody());
 				} else {
 					error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 				}
-				*/
+				
 				$text = "Image Sent";				
 				break;
 			case "video":
