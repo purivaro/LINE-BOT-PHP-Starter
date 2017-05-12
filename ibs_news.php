@@ -203,6 +203,7 @@ foreach ($events as $event) {
 				'timestamp' => $timestamp,
 				'msgId' => $msgId,
 				'location' => $location,
+				'read' => 0,
 		]);
 
 
