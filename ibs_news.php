@@ -103,15 +103,13 @@ foreach ($events as $event) {
 				$text = $event->getText();				
 				break;
 			case "image":
-				/*
-				$response = $bot->getMessageContent('<messageId>');
+				$response = $bot->getMessageContent($msgId);
 				if ($response->isSucceeded()) {
 					$tempfile = tmpfile();
 					fwrite($tempfile, $response->getRawBody());
 				} else {
 					error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
 				}
-				*/
 				$text = "Image Sent";				
 				break;
 			case "video":
@@ -134,7 +132,13 @@ foreach ($events as $event) {
 					\n getAddress : $getAddress
 					\n getLatitude : $getLatitude
 					\n getLongitude : $getLongitude				
-				";				
+				";
+				$location =	[
+					'Title' => $getTitle,
+					'Address' => $getAddress,
+					'Latitude' => $getLatitude,
+					'Longitude' => $getLongitude,
+				];					
 				break;
 			case "sticker":
 				$StickerId = $event->getStickerId();		
@@ -186,6 +190,7 @@ foreach ($events as $event) {
 		]);
 
 
+
 		// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
 		$chat_history_user = $database->getReference("ibs/line/contact/user/{$row_key}/chat_history");
 		$chat_history_user->push([
@@ -196,6 +201,7 @@ foreach ($events as $event) {
 				'text' => $text,
 				'timestamp' => $timestamp,
 				'msgId' => $msgId,
+				'location' => $location,
 		]);
 
 
