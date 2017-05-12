@@ -170,12 +170,12 @@ foreach ($events as $event) {
 		
 		// ถ้ายังไม่ลงทะเบียน ก็ลงทะเบียนให้ โดยส่งค่าไปบันทึกใน firebase	
 		if(!$registed){
-			$ref_user->push([
+			$postRef = $ref_user->push([
 					'UserId' => $UserId,
 					'PhotoUrl' => $pictureUrl,
 					'DisplayName' => $displayName
 			]);
-			$row_key = $ref_user->getKey();
+			$row_key = $postRef->getKey();
 		}
 
 		// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
