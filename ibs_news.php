@@ -157,8 +157,11 @@ foreach ($events as $event) {
 		// check ดูว่ามีรายชื่อ line id นี้ ใน firebase หรือยัง
 		$ref_user = $database->getReference('ibs/line/contact/user');
 		$data = $ref_user->getValue(); 
-		foreach($data as $value){
-			if($UserId==$value['UserId']){$registed = true;}
+		foreach($data as $key => $value){
+			if($UserId==$value['UserId']){
+				$registed = true;
+				$row_key = $key;
+			}
 		}
 		
 		// ถ้ายังไม่ลงทะเบียน ก็ลงทะเบียนให้ โดยส่งค่าไปบันทึกใน firebase	
@@ -184,10 +187,7 @@ foreach ($events as $event) {
 
 
 		// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
-		$chat_history_user = $database->getReference('ibs/line/contact/user')->orderByChild('UserId')
-			// returns all persons being exactly 1.98 (meters) tall
-			->equalTo($UserId)
-			->getSnapshot();
+		$chat_history_user = $database->getReference("ibs/line/contact/user/{$row_key}/chat_history");
 		$chat_history_user->push([
 				'line_id' => $UserId,
 				'MessageType' => $MessageType,
