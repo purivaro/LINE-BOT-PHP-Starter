@@ -193,7 +193,7 @@ foreach ($events as $event) {
 
 
 		// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
-		$chat_history_user = $database->getReference("ibs/line/contact/user/{$row_key}/chat_history");
+		$chat_history_user = $database->getReference("ibs/line/contact/user/{$row_key}/chat");
 		$chat_history_user->push([
 				'line_id' => $UserId,
 				'MessageType' => $MessageType,
