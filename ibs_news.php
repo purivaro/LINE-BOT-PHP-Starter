@@ -204,7 +204,6 @@ foreach ($events as $event) {
 				'msgId' => $msgId,
 				'location' => $location,
 				'read' => 0,
-				'row_key' => $row_key,
 		]);
 
 
