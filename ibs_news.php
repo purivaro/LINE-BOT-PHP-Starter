@@ -187,6 +187,7 @@ foreach ($events as $event) {
 				'text' => $text,
 				'timestamp' => $timestamp,
 				'msgId' => $msgId,
+				'location' => $location,
 		]);
 
 
