@@ -175,6 +175,7 @@ foreach ($events as $event) {
 					'PhotoUrl' => $pictureUrl,
 					'DisplayName' => $displayName
 			]);
+			$row_key = $ref_user->getKey();
 		}
 
 		// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
@@ -189,7 +190,6 @@ foreach ($events as $event) {
 				'msgId' => $msgId,
 				'location' => $location,
 		]);
-
 
 
 		// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
