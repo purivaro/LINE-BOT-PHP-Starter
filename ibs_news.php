@@ -181,29 +181,29 @@ foreach ($events as $event) {
 		// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
 		$chat_history = $database->getReference('ibs/line/chat_all');
 		$chat_history->push([
-				'line_id' => $UserId,
+				'UserId' => $UserId,
 				'MessageType' => $MessageType,
-				'pictureUrl' => $pictureUrl,
-				'displayName' => $displayName,
-				'text' => $text,
+				'PhotoUrl' => $pictureUrl,
+				'DisplayName' => $displayName,
+				'Text' => $text,
 				'timestamp' => $timestamp,
-				'msgId' => $msgId,
-				'location' => $location,
+				'MessageId' => $msgId,
+				'Location' => $location,
 		]);
 
 
 		// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
 		$chat_history_user = $database->getReference("ibs/line/contact/user/{$row_key}/ChatHistory");
 		$chat_history_user->push([
-				'line_id' => $UserId,
+				'UserId' => $UserId,
 				'MessageType' => $MessageType,
-				'pictureUrl' => $pictureUrl,
-				'displayName' => $displayName,
-				'text' => $text,
+				'PhotoUrl' => $pictureUrl,
+				'DisplayName' => $displayName,
+				'Text' => $text,
 				'timestamp' => $timestamp,
-				'msgId' => $msgId,
-				'location' => $location,
-				'read' => 0,
+				'MessageId' => $msgId,
+				'Location' => $location,
+				'Read' => 0,
 		]);
 
 
