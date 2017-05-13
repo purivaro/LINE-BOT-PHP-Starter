@@ -10,6 +10,10 @@ $text_send = $_REQUEST['text_send'];
 $thumbnail = $_REQUEST['thumbnail'];
 
 // user id ของ puri = 'U02a2cb394330d90571a21b09f2c230ea'
+if(!$text_send){
+    exit();
+}
+
 
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]);
