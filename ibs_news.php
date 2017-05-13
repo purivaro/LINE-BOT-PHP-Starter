@@ -165,6 +165,7 @@ foreach ($events as $event) {
 			if($UserId==$value['UserId']){
 				$registed = true;
 				$row_key = $key;
+				$Unread = ($value['Unread'])*1;
 			}
 		}
 		
@@ -208,8 +209,9 @@ foreach ($events as $event) {
 		]);
 
 		// เก็บข้อมูล Chat ล่าสุด to Firebase
-		$chat_history_user_last_text = $database->getReference("ibs/line/contact/user/{$row_key}/ChatLastText")->set($text);
-		$chat_history_user_last_timestaml = $database->getReference("ibs/line/contact/user/{$row_key}/ChatLastTimestamp")->set($timestamp);
+		$database->getReference("ibs/line/contact/user/{$row_key}/ChatLastText")->set($text);
+		$database->getReference("ibs/line/contact/user/{$row_key}/ChatLastTimestamp")->set($timestamp);
+		$database->getReference("ibs/line/contact/user/{$row_key}/Unread")->set($Unread+1);
 
 
 
