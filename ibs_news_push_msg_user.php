@@ -5,7 +5,7 @@ define("LINE_MESSAGING_API_CHANNEL_TOKEN", '2Kv6ENeGC9MlIuiCLnePFEfbvkntSmNgCXhh
 
 require __DIR__."/vendor/autoload.php";
 
-$msg_type = $_REQUEST['msg_type'];
+$MessageType = $_REQUEST['msg_type'];
 $UserId = $_REQUEST['UserId'];
 $text_send = $_REQUEST['text_send'];
 $thumbnail = $_REQUEST['thumbnail'];
@@ -23,16 +23,16 @@ $database = $firebase->getDatabase();
 // สร้าง Object ข้อความตอบกลับ
 $messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
-if($msg_type == 'text'){
+if($MessageType == 'text'){
     // ข้อความ
     $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_send);
     $messages->add($_msg);
     
-}elseif($msg_type == 'image'){
+}elseif($MessageType == 'image'){
     // รูป
     $imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($text_send,$thumbnail);
     $messages->add($imageMessageBuilder);
-}elseif($msg_type == 'video'){
+}elseif($MessageType == 'video'){
     // Video
     $VideoMessageBuilder = new \LINE\LINEBot\MessageBuilder\VideoMessageBuilder($text_send,$thumbnail);
     $messages->add($VideoMessageBuilder);
@@ -50,10 +50,32 @@ $current_time = date("Y/m/d H:i:s");
 $chat_history = $database->getReference('ibs/line/chat_all');
 $chat_history->push([
     'UserId' => $UserId,
-    'MessageType' => $msg_type,
-    'text' => $text_send,
-    'thumbnail' => $thumbnail,
+    'MessageType' => $MessageType,
+    'Text' => $text_send,
+    'Thumbnail' => $thumbnail,
     'current_time' => $current_time,
+    'DisplayName' => 'admin',
+]);
+
+
+// check ดูว่ามีรายชื่อ line id นี้ ใน firebase หรือยัง
+$ref_user = $database->getReference('ibs/line/contact/user');
+$data = $ref_user->getValue(); 
+foreach($data as $key => $value){
+    if($UserId==$value['UserId']){
+        $row_key = $key;
+    }
+}
+
+// เก็บข้อมูลที่เต้าส่งมา Push to Firebase
+$chat_history_user = $database->getReference("ibs/line/contact/user/{$row_key}/ChatHistory");
+$chat_history_user->push([
+    'UserId' => $UserId,
+    'MessageType' => $MessageType,
+    'Text' => $text_send,
+    'Thumbnail' => $thumbnail,
+    'current_time' => $current_time,
+    'DisplayName' => 'admin',
 ]);
 
 
