@@ -57,7 +57,7 @@ $date = new DateTime();
 $timestamp = $date->getTimestamp();
 
 // เก็บข้อมูลที่เต้าส่งมา Push to Firebase
-$chat_history = $database->getReference('ibs/line/chat_history');
+$chat_history = $database->getReference('ibs/line/broadcastGroup');
 $chat_history->push([
     'GroupId' => $GroupId,
     'MessageType' => $msg_type,
