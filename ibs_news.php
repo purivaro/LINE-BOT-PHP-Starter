@@ -218,16 +218,11 @@ foreach ($events as $event) {
 
 
 		// ข้อความตอบกลับ 1
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("สวัสดีคุณ".$displayName);
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("🌟เราได้รับข้อความของคุณ{$displayName} แล้วค่ะ💡");
 		$reply_messages->add($_msg);
 
 		$response_text = 
-		"🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
-		\n🌹 ขอบคุณที่รับเป็นเพื่อนนะคะ 🌹
-		\n🔊 ฉันคือ Line-Bot 
-		\n🔔 \"แจ้งข่าวชมรมพุทธ\" 🔔
-		\n🍀🍀🍀 มีหน้าที่นำข่าวสารและกิจกรรมดีๆจากชมรมพุทธศาสตร์สากลฯ มาฝากท่านค่ะ 🕊 🕊 🕊 
-		\n💡 ท่านสามารถฝากคำถามทิ้งไว้ได้นะคะ แล้วทางทีมงานจะทยอยมาตอบให้ค่ะ ^^
+		"\n ท่านสามารถฝากข้อความไว้ได้้อีกนะคะ แล้วทางทีมงานจะทยอยมาตอบให้ค่ะ ^^
 		\n🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
 		";
 
