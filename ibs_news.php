@@ -173,7 +173,8 @@ foreach ($events as $event) {
 			$postRef = $ref_user->push([
 					'UserId' => $UserId,
 					'PhotoUrl' => $pictureUrl,
-					'DisplayName' => $displayName
+					'DisplayName' => $displayName,
+					'timestamp' => $timestamp
 			]);
 			$row_key = $postRef->getKey();
 		}
@@ -206,7 +207,9 @@ foreach ($events as $event) {
 				'Read' => 0,
 		]);
 
-
+		// เก็บข้อมูล Chat ล่าสุด to Firebase
+		$chat_history_user_last_text = $database->getReference("ibs/line/contact/user/{$row_key}/ChatLastText")->set($text);
+		$chat_history_user_last_timestaml = $database->getReference("ibs/line/contact/user/{$row_key}/ChatLastTimestamp")->set($timestamp);
 
 
 
