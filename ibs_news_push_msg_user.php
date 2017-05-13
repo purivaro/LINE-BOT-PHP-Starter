@@ -55,6 +55,7 @@ $chat_history->push([
     'Thumbnail' => $thumbnail,
     'current_time' => $current_time,
     'DisplayName' => 'admin',
+    'Admin' => 1,
 ]);
 
 
@@ -76,6 +77,7 @@ $chat_history_user->push([
     'Thumbnail' => $thumbnail,
     'current_time' => $current_time,
     'DisplayName' => 'admin',
+    'Admin' => 1,
 ]);
 
 
