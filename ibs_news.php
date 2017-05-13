@@ -19,11 +19,15 @@ try {
 $firebase = Firebase::fromServiceAccount(__DIR__.'/puri-contact-firebase-adminsdk-l04g2-fa656ae233.json');
 $database = $firebase->getDatabase();
 
+date_default_timezone_set('Asia/Bangkok');
+$current_time = date("Y/m/d H:i:s");
+$date = new DateTime();
+$timestamp = $date->getTimestamp();
 
 
 foreach ($events as $event) {
 	$eventType = $event->getType();
-	$timestamp = $event->getTimestamp();	
+	//$timestamp = $event->getTimestamp();	
 
 	// ถ้าเป็นการ join group
 	if($eventType == 'join'){
