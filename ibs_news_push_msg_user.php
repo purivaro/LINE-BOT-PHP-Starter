@@ -10,6 +10,9 @@ $UserId = $_REQUEST['UserId'];
 $text_send = $_REQUEST['text_send'];
 $thumbnail = $_REQUEST['thumbnail'];
 
+if(!$text_send){
+    exit();
+}
 // user id ของ puri = 'U02a2cb394330d90571a21b09f2c230ea'
 
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN);
