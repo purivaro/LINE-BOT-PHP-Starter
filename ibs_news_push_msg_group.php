@@ -5,7 +5,7 @@ define("LINE_MESSAGING_API_CHANNEL_TOKEN", '2Kv6ENeGC9MlIuiCLnePFEfbvkntSmNgCXhh
 
 require __DIR__."/vendor/autoload.php";
 
-$msg_type = $_REQUEST['msg_type'];
+$MessageType = $_REQUEST['msg_type'];
 $text_send = $_REQUEST['text_send'];
 $thumbnail = $_REQUEST['thumbnail'];
 
@@ -22,16 +22,16 @@ $database = $firebase->getDatabase();
 // สร้าง Object ข้อความตอบกลับ
 $messages = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
-if($msg_type == 'text'){
+if($MessageType == 'text'){
     // ข้อความ
     $_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text_send);
     $messages->add($_msg);
     
-}elseif($msg_type == 'image'){
+}elseif($MessageType == 'image'){
     // รูป
     $imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($text_send,$thumbnail);
     $messages->add($imageMessageBuilder);
-}elseif($msg_type == 'video'){
+}elseif($MessageType == 'video'){
     // Video
     $VideoMessageBuilder = new \LINE\LINEBot\MessageBuilder\VideoMessageBuilder($text_send,$thumbnail);
     $messages->add($VideoMessageBuilder);
@@ -60,7 +60,7 @@ $timestamp = $date->getTimestamp();
 $chat_history = $database->getReference('ibs/line/broadcastGroup');
 $chat_history->push([
     'GroupId' => $GroupId,
-    'MessageType' => $msg_type,
+    'MessageType' => $MessageType,
     'Text' => $text_send,
     'Thumbnail' => $thumbnail,
     'current_time' => $current_time,
