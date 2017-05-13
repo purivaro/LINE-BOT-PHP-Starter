@@ -53,14 +53,18 @@ date_default_timezone_set('Asia/Bangkok');
 
 $current_time = date("Y/m/d H:i:s");
 
+$date = new DateTime();
+$timestamp = $date->getTimestamp();
+
 // เก็บข้อมูลที่เต้าส่งมา Push to Firebase
 $chat_history = $database->getReference('ibs/line/chat_history');
 $chat_history->push([
     'GroupId' => $GroupId,
     'MessageType' => $msg_type,
-    'text' => $text_send,
-    'thumbnail' => $thumbnail,
+    'Text' => $text_send,
+    'Thumbnail' => $thumbnail,
     'current_time' => $current_time,
+    'timestamp' => $timestamp,
 ]);
 
 
