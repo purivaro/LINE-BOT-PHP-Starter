@@ -218,9 +218,10 @@ foreach ($events as $event) {
 
 
 		// ข้อความตอบกลับ 1
-		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("🌟เราได้รับข้อความของคุณ{$displayName} แล้วค่ะ💡");
+		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("🌟เราได้รับข้อความของคุณ{$displayName} แล้วค่ะ ทางทีมงานจะทยอยตอบนะคะ💡");
 		$reply_messages->add($_msg);
 
+/*
 		$response_text = 
 		"\n ท่านสามารถฝากข้อความไว้ได้้อีกนะคะ แล้วทางทีมงานจะทยอยตอบให้ค่ะ ^^
 		\n🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
@@ -229,7 +230,7 @@ foreach ($events as $event) {
 
 		$_msg = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($response_text);
 		$reply_messages->add($_msg);
-
+*/
 
 		// ส่งข้อความตอบกลับ
 		$response = $bot->replyMessage($reply_token, $reply_messages);
